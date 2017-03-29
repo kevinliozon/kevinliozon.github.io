@@ -7,7 +7,7 @@ import { Hobby } from '../shared/models/hobby';
 import { HobbyService } from '../shared/hobby.service'
 
 @Component({
-  moduleId: module.id.replace("/dist/", "/app/"),
+  moduleId: module.id,
   templateUrl: 'about.html'
 })
 export class AboutComponent

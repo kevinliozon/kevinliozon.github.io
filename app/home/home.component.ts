@@ -14,7 +14,7 @@ import { Diploma } from '../shared/models/diploma';
 import { DiplomaService } from '../shared/diploma.service'
 
 @Component({
-  moduleId: module.id.replace("/dist/", "/app/"),
+  moduleId: module.id,
   templateUrl: 'home.html'
 })
 export class HomeComponent

@@ -4,7 +4,7 @@ import { Project } from '../shared/models/project';
 import { ProjectService } from '../shared/project.service'
 
 @Component({
-  moduleId: module.id.replace("/dist/", "/app/"),
+  moduleId: module.id,
   templateUrl: 'projects.html'
 })
 
