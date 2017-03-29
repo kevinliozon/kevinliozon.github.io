@@ -1,32 +1,29 @@
 <html>
   <head>
+    <base href="/">
     <title>Kevin Liozon</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="assets/icon/favicon.svg" sizes="16x16" type="image/svg+xml">
-    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css"> -->
     <link rel="stylesheet" href="styles.css">
     <!-- 1. Load libraries -->
-    <!-- Polyfill for older browsers -->
-    <!-- build:vendor -->
-    <script src="node_modules/core-js/client/shim.min.js"></script>
-    <script src="node_modules/zone.js/dist/zone.js "></script>
-    <script src="node_modules/reflect-metadata/Reflect.js"></script>
-    <script src="node_modules/systemjs/dist/system.src.js"></script>
-    <script src="node_modules/jquery/dist/jquery.min.js"></script>
-    <!-- endbuild -->
-    <!-- 2. Configure SystemJS -->
-    <!-- build:app -->
-    <script src="systemjs.config.js"></script>
-    <!-- endbuild -->
-    <script>
-      System.import('app').catch(function(err){ console.error(err); });
-    </script>
+    <!-- Polyfills -->
+   <script src="https://unpkg.com/core-js/client/shim.min.js"></script>
+   <!-- Update these package versions as needed -->
+   <script src="https://unpkg.com/zone.js@0.8.4?main=browser"></script>
+   <script src="https://unpkg.com/systemjs@0.19.39/dist/system.src.js"></script>
+   <!-- This SystemJS configuration loads umd packages from the web -->
+   <script src="systemjs.config.server.js"></script>
+   <script>
+     System.import('app/main.js')
+           .catch(function(err){ console.error(err); });
+   </script>
   </head>
   <!-- 3. Display the application -->
   <body>
     <my-app></my-app>
-    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script> -->
     <!-- build:boot -->
     <!-- endbuild -->
   </body>

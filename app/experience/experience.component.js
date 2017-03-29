@@ -23,7 +23,7 @@ var ExperienceComponent = (function () {
 }());
 ExperienceComponent = __decorate([
     core_1.Component({
-        moduleId: module.id,
+        moduleId: module.id.replace("/dist/", "/app/"),
         templateUrl: 'experience.html'
     }),
     __metadata("design:paramtypes", [role_service_1.RoleService])

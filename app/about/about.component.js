@@ -44,7 +44,7 @@ var AboutComponent = (function () {
 }());
 AboutComponent = __decorate([
     core_1.Component({
-        moduleId: module.id,
+        moduleId: module.id.replace("/dist/", "/app/"),
         templateUrl: 'about.html'
     }),
     __metadata("design:paramtypes", [tool_service_1.ToolService, hobby_service_1.HobbyService])

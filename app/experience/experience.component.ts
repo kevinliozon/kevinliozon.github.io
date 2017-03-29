@@ -4,7 +4,7 @@ import { Role } from '../shared/models/role';
 import { RoleService } from '../shared/role.service'
 
 @Component({
-  moduleId: module.id,
+  moduleId: module.id.replace("/dist/", "/app/"),
   templateUrl: 'experience.html'
 })
 export class ExperienceComponent {

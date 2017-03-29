@@ -24,7 +24,7 @@ var SkillsComponent = (function () {
 }());
 SkillsComponent = __decorate([
     core_1.Component({
-        moduleId: module.id,
+        moduleId: module.id.replace("/dist/", "/app/"),
         templateUrl: 'skills.html'
     }),
     __metadata("design:paramtypes", [skill_service_1.SkillService])

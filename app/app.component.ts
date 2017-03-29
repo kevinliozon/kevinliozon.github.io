@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { TranslateService } from './translate/translate.service';
-import { Title } from '@angular/platform-browser';
+import { Title }     from '@angular/platform-browser';
 
 @Component({
-  moduleId: module.id,
+  moduleId: module.id.replace("/dist/", "/app/"),
   selector: 'my-app',
   templateUrl: 'app.html'
 })

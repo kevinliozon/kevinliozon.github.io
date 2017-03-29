@@ -49,7 +49,7 @@ var AppComponent = (function () {
 }());
 AppComponent = __decorate([
     core_1.Component({
-        moduleId: module.id,
+        moduleId: module.id.replace("/dist/", "/app/"),
         selector: 'my-app',
         templateUrl: 'app.html'
     }),
