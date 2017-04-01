@@ -24,7 +24,7 @@ var ProjectsComponent = (function () {
 }());
 ProjectsComponent = __decorate([
     core_1.Component({
-        moduleId: module.id.replace("/dist/", "/app/"),
+        moduleId: module.id.replace("/dist/app/", "/app/"),
         templateUrl: 'projects.html'
     }),
     __metadata("design:paramtypes", [project_service_1.ProjectService])

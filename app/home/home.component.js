@@ -43,7 +43,7 @@ var HomeComponent = (function () {
 }());
 HomeComponent = __decorate([
     core_1.Component({
-        moduleId: module.id.replace("/dist/", "/app/"),
+        moduleId: module.id.replace("/dist/app/", "/app/"),
         templateUrl: 'home.html'
     }),
     __metadata("design:paramtypes", [project_service_1.ProjectService,

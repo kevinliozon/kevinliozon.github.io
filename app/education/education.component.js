@@ -23,7 +23,7 @@ var EducationComponent = (function () {
 }());
 EducationComponent = __decorate([
     core_1.Component({
-        moduleId: module.id.replace("/dist/", "/app/"),
+        moduleId: module.id.replace("/dist/app/", "/app/"),
         templateUrl: 'education.html'
     }),
     __metadata("design:paramtypes", [diploma_service_1.DiplomaService])
