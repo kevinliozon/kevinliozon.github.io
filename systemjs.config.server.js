@@ -10,7 +10,7 @@
     },
     // map tells the System loader where to look for things
     map: {
-      app: 'app', // location of transpiled app files
+      app: 'dist', // location of transpiled app files
       // angular minimized umd bundles
       '@angular/core': 'npm:@angular/core/bundles/core.umd.min.js',
       '@angular/common': 'npm:@angular/common/bundles/common.umd.min.js',
@@ -30,7 +30,7 @@
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
       app: {
-        main: './main.js',
+        main: 'dist/main.js',
         defaultExtension: 'js'
       },
       rxjs: {
