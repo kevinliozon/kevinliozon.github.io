@@ -27,21 +27,24 @@ gulp.task('tscompile', function () {
 
 gulp.task("libs", () => {
   return gulp.src([
-          'core-js/client/shim.min.js',
-          'zone.js/dist/zone.js',
-          'reflect-metadata/Reflect.js',
-          'systemjs/dist/system.src.js'
+          // 'core-js/client/shim.min.js',
+          // 'zone.js/dist/zone.js',
+          // 'reflect-metadata/Reflect.js',
+          // 'systemjs/dist/system.src.js',
+          'jquery/dist/jquery.min.js',
+          'bootstrap/dist/js/bootstrap.min.js'
+
       ], {cwd: "node_modules/**"})
       .pipe(concat('vendors.min.js'))
       .pipe(uglify())
-      .pipe(gulp.dest("dist_test/lib"));
+      .pipe(gulp.dest("dist/lib"));
 });
 
 gulp.task('boot-bundle', function() {
   gulp.src('config.prod.js')
     .pipe(concat('boot.min.js'))
     .pipe(uglify())
-    .pipe(gulp.dest('dist_test'));
+    .pipe(gulp.dest('dist'));
  });
 
  gulp.task('html', function() {
@@ -51,7 +54,7 @@ gulp.task('boot-bundle', function() {
       'app': 'app.min.js',
       'boot': 'boot.min.js'
     }))
-    .pipe(gulp.dest('dist_test'));
+    .pipe(gulp.dest('dist'));
 });
 
 // Lint Task
@@ -66,12 +69,16 @@ gulp.task('sass', function() {
     return gulp.src('app/**/*.scss')
         .pipe(concat('styles.scss'))
         .pipe(sass())
-        .pipe(gulp.dest('./'));
+        .pipe(gulp.dest('.tmp'));
 });
 
 // Minify the generated styles.css
 gulp.task('minify-css', function() {
-    return gulp.src('styles.css')
+    return gulp.src([
+          'node_modules/bootstrap/dist/css/bootstrap.css',
+          '.tmp/styles.css'
+        ])
+        .pipe(concat('styles.css'))
         .pipe(cleanCSS({debug: true}, function(details) {
             console.log(details.name + ': ' + details.stats.originalSize);
             console.log(details.name + ': ' + details.stats.minifiedSize);
