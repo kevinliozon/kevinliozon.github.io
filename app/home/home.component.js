@@ -25,7 +25,7 @@ var HomeComponent = (function () {
     HomeComponent.prototype.ngOnInit = function () {
         this.introContent = {
             "title": "A Front-End Architect at your service",
-            "image": "app/shared/images/photo.png",
+            "image": "dist/assets/img/png/photo.png",
             "alt": "My photo would have appeared if you activated Javascript on this browser :-("
         };
         this.homeTitles = [
