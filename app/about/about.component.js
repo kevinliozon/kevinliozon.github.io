@@ -10,12 +10,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
+var router_1 = require("@angular/router");
 var tool_service_1 = require("../shared/tool.service");
 var hobby_service_1 = require("../shared/hobby.service");
 var AboutComponent = (function () {
-    function AboutComponent(ToolService, HobbyService) {
+    function AboutComponent(ToolService, HobbyService, route) {
         this.ToolService = ToolService;
         this.HobbyService = HobbyService;
+        this.route = route;
     }
     AboutComponent.prototype.ngOnInit = function () {
         this.details = {
@@ -36,8 +38,13 @@ var AboutComponent = (function () {
         this.hobbies = this.HobbyService.getHobbies();
         // window.location.hash retrieves the anchor
         // then scroll down to correct level
-        setTimeout(function () {
-            document.querySelector(window.location.hash).scrollIntoView();
+        // setTimeout(() => {
+        //   document.querySelector(window.location.hash).scrollIntoView();
+        // });
+        this.route.fragment.subscribe(function (f) {
+            var element = document.querySelector("#" + f);
+            if (element)
+                element.scrollIntoView(element);
         });
     };
     return AboutComponent;
@@ -47,7 +54,7 @@ AboutComponent = __decorate([
         moduleId: module.id.replace("/dist/app/", "/app/"),
         templateUrl: 'about.html'
     }),
-    __metadata("design:paramtypes", [tool_service_1.ToolService, hobby_service_1.HobbyService])
+    __metadata("design:paramtypes", [tool_service_1.ToolService, hobby_service_1.HobbyService, router_1.ActivatedRoute])
 ], AboutComponent);
 exports.AboutComponent = AboutComponent;
 //# sourceMappingURL=about.component.js.map
