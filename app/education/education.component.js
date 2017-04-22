@@ -23,6 +23,7 @@ var EducationComponent = (function () {
 }());
 EducationComponent = __decorate([
     core_1.Component({
+        selector: 'education',
         moduleId: module.id.replace("/dist/app/", "/app/"),
         templateUrl: 'education.html'
     }),
