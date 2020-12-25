@@ -10,13 +10,22 @@
     <body>
         <header><nav id="header-nav"></nav></header>
         <div id="wrap"></div>
-        <footer><nav id="footer-nav"></nav></footer>
+        <footer>
+            <nav id="footer-nav"></nav>
+            <nav id="footer-nav-alt"></nav>
+        </footer>
         
+        <!-- Vendors -->
+        <script src="https://smtpjs.com/v3/smtp.js"></script>
         <!-- Global variables -->
         <script src="global.js"></script>
-        <!-- Renderers -->
-        <script src="router.js"></script>
-        <script src="render-nav.js"></script>
-        <script src="render-view.js"></script>
+        <!-- Renderer modules -->
+        <script src="render-route.module.js"></script>
+        <script src="render-nav.module.js"></script>
+        <script src="render-view.module.js"></script>
+        <!-- Root script -->
+        <script src="index.js"></script>
+        <!-- The script below is dynamically linked to the relevant page controller -->
+        <script src=""></script>
     </body>
 </html>
