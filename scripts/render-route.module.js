@@ -34,7 +34,7 @@ const moduleRouter = (() => {
     */
   function _getErrorPageTemplate() {
   wrapTemplate.innerHTML = 'loading...';
-  const activeTemplate = '/404';
+  const activeTemplate = '/pages/404';
   const activePage = 'Page not found';
   const activeUrl = location.origin + '#page=404';
   fetch(activeTemplate, { method: 'GET' })
@@ -82,7 +82,6 @@ const moduleRouter = (() => {
         if(response.status !== 404) {
           return response.text(); // turn HTML response into a string
         } else {
-          _getErrorPageTemplate()
           throw new Error('No template for this page - 404')
         }
       }) 
@@ -93,7 +92,10 @@ const moduleRouter = (() => {
         wrapTemplate.innerHTML = content; // Fills the wrap with template
         return _getPageController(activeTemplate) // Adds template's controller
       })
-      .catch(error => console.error('error: ', error))
+      .catch(error => {
+        _getErrorPageTemplate(); // no template => 404 page
+        console.error('error: ', error);
+      })
   }
 
   /**
@@ -104,30 +106,56 @@ const moduleRouter = (() => {
     * @private
     */
   function _callTemplate() {
-    // Are we refreshing an existing page, otherwise we fall back onto homepage
-    (history && history.state) ? 
-    _getCurrentPageTemplate() : 
-    _getPageTemplate('/home', 'Home', '#page=home');
+    if (location.href === location.origin + location.pathname || !history) {
+      // If no page selected or there is no history registered, we fall back onto homepage
+      _getPageTemplate(pages[0].templatePath, pages[0].name, pages[0].href)
+    } else {
+      // Are we refreshing an existing page? otherwise we go back to the page before hashchange
+      (history.state) ? _getCurrentPageTemplate() : history.back();
+    }
   }
 
   /**
     * Is called on load
     * Set up the event listeners for the navigation and the generation of templates
     * within the single page wrap.
+    * @param {String} linkClass The class of the links we want to listen to
     * @private
     */
-  function _navListener() {
+  function _linksListener(linkClass) {
     // Array with all navigation links
-    Array.from(document.getElementsByClassName('nav__link')).forEach((navLink) => {
+    Array.from(document.getElementsByClassName(linkClass)).forEach((link) => {
       // Event listener on each link
-      navLink.addEventListener('click', function(e) {
-        // If page selected is different than actual one we trigger a push state
-        if(this.dataset.template !== history.state.template) {
-          _getPageTemplate(this.dataset.template, navLink.text, this.href);
+      link.addEventListener('click', function(e) {
+        // If page selected is the same as actual one: do nothing
+        if(history.state !== null && history.state.template !== null && this.dataset !== undefined && this.dataset.template === history.state.template) {
+          return;
+        } else {
+          _getPageTemplate(this.dataset.template, link.text, this.href);
         }
-        //This prevents the browser from actually following the link
-        e.preventDefault();
+        //This prevents the browser from actually following the default link
         e.stopPropagation();
+        e.preventDefault();
+      }, false)
+    })
+  }
+
+  /**
+    * Is called on load
+    * Set up the event listeners for the side nav and scroll to the relevant content
+    * @param {String} linkClass The class of the links we want to listen to
+    * @private
+    */
+  function _hashListener(linkClass) {
+    // Array with all navigation links
+    Array.from(document.getElementsByClassName(linkClass)).forEach((link) => {
+      // Event listener on each link
+      link.addEventListener('click', function(e) {
+        // Scrolls to the content with matching fragment
+        document.getElementById(link.dataset.hash).scrollIntoView();
+        //This prevents the browser from actually following the default link
+        e.stopPropagation();
+        e.preventDefault();
       }, false)
     })
   }
@@ -142,25 +170,31 @@ const moduleRouter = (() => {
   function _navStateOrHashChange() {
     wrapTemplate.innerHTML = 'loading...';
     // we check if the new url has got a corresponding template
-    fetch(location.href.replace('#page=',''), { method: 'GET' }).then(response => {
+    fetch(location.href.replace('#page=','pages/'), { method: 'GET' }).then(response => {
       if(response.status !== 404) {
         return response.text(); // has a template
       } else {
-        _getErrorPageTemplate(); // no template => 404 page
         throw new Error('No template for this page - 404')
       }
     })
     .then(content => {
       wrapTemplate.innerHTML = content;  // page is filled with new template
-      return _getPageController(location.hash.replace('#page=','/')) // we get the controller for the page accessed
+      return _getPageController(location.hash.replace('#page=','/pages/')) // we get the controller for the page accessed
     })
-    .catch(error => console.error('error: ', error))
+    .catch(error => {
+      _getErrorPageTemplate(); // no template => 404 page
+      console.error('error: ', error)
+    })
   }
 
   /*** PUBLIC METHODS ***/
 
-  function navListener() {
-    _navListener();
+  function linksListener(linkClass) {
+    _linksListener(linkClass);
+  }
+
+  function hashListener(linkClass) {
+    _hashListener(linkClass);
   }
 
   function callTemplate() {
@@ -171,9 +205,15 @@ const moduleRouter = (() => {
     _navStateOrHashChange();
   }
 
+  function getErrorPageTemplate() {
+    _getErrorPageTemplate()
+  }
+
   return {
-    navListener: navListener,
+    linksListener: linksListener,
+    hashListener: hashListener,
     callTemplate: callTemplate,
-    navStateOrHashChange: navStateOrHashChange
+    navStateOrHashChange: navStateOrHashChange,
+    getErrorPageTemplate : getErrorPageTemplate
   };
 })();
