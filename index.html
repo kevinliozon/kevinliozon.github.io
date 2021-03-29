@@ -4,7 +4,7 @@
     <title>Portfolio</title>
     <meta charset="UTF-8">
     <meta http-equiv="Cache-control" content="no-cache"> <!-- Only for dev -->
-    <script type="text/babel" src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.12.1/polyfill.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/normalize.min.css">
     <link rel="stylesheet" type="text/css" href="css/fonts.min.css">
     <link rel="stylesheet" type="text/css" href="css/styles.min.css">
@@ -27,13 +27,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.12.1/polyfill.min.js" async></script>
     <script src="https://cdn.polyfill.io/v2/polyfill.js?features=es2015,es2016,es2017,es2018,Element.prototype.matches"></script> -->
     <!-- Global variables -->
-    <script src="scripts/global.js" defer></script>
+    <script src="scripts/global.js" type="text/babel"></script>
     <!-- Renderer modules -->
-    <script src="scripts/render-route.module.js" defer></script>
-    <script src="scripts/render-nav.module.js" defer></script>
-    <script src="scripts/render-view.module.js" defer></script>
+    <script src="scripts/render-route.module.js" type="text/babel"></script>
+    <script src="scripts/render-nav.module.js" type="text/babel"></script>
+    <script src="scripts/render-view.module.js" type="text/babel"></script>
     <!-- Root script -->
-    <script src="scripts/index.js" defer></script>
+    <script src="scripts/index.js" type="text/babel"></script>
     <!-- The script below is dynamically linked to the relevant page controller -->
     <script src=""></script>
   </body>
