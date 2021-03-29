@@ -1,24 +1,25 @@
-/*** CONTAINERS ***/
-const wrapHeaderNav = document.getElementById('header-nav');
-const wrapFooterNav = document.getElementById('footer-nav');
-const wrapFooterNavAlt = document.getElementById('footer-nav-alt');
-const wrapTemplate = document.getElementById('wrap');
+"use strict";
 
+/*** CONTAINERS ***/
+var wrapHeaderNav = document.getElementById('header-nav');
+var wrapFooterNav = document.getElementById('footer-nav');
+var wrapFooterNavAlt = document.getElementById('footer-nav-alt');
+var wrapTemplate = document.getElementById('wrap');
 /**
  * On load or refresh:
  * - Build the header and footer navs as well as their respective listeners
  * - Call the template
  */
-window.addEventListener('load', e => {
+
+window.addEventListener('load', function (e) {
   // Building the navigations
   moduleNav.buildNavMain();
-  moduleNav.buildNavAlt();
-  // Building the navigation listener
-  moduleRouter.linksListener('js-link--nav');
-  // Calls the template relevant to the page we are loading from
+  moduleNav.buildNavAlt(); // Building the navigation listener
+
+  moduleRouter.linksListener('js-link--nav'); // Calls the template relevant to the page we are loading from
+
   moduleRouter.callTemplate();
 });
-
 /**
  * On change in the url or upon state change
  * We cannot force the url to inject the root wrap (with header/wrap/footer) within itself: when hash === "#page="
@@ -28,7 +29,8 @@ window.addEventListener('load', e => {
  * - page selected is valid and contains a fragment: Scroll to fragment
  * - page selected is invalid: 404
  */
-window.addEventListener('hashchange', e => {
+
+window.addEventListener('hashchange', function (e) {
   if (location.hash.indexOf('#page=') > -1 && location.hash !== '#page=') {
     // If the hash contains the string '#page=' but does not match it (root folder)
     if (location.hash.replace(/[^#]/g, '').length <= 1) {

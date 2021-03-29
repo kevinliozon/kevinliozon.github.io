@@ -1,5 +1,7 @@
+"use strict";
+
 /*** PAGES - Home page should be first ***/
-const pages = [{
+var pages = [{
   name: 'Overview',
   label: 'Navigate to overview page',
   href: '#page=home',
@@ -42,9 +44,9 @@ const pages = [{
   templatePath: '/pages/terms',
   isMain: false
 }];
-
 /*** EXTERNAL LINKS ***/
-const externalPages = [{
+
+var externalPages = [{
   name: 'Email me',
   label: 'Open your email application to contact me via email',
   href: 'mailto:kevinliozonpro@gmail.com'
@@ -61,9 +63,9 @@ const externalPages = [{
   label: 'Open a new tab and see my profile on Stackshare',
   href: 'https://stackshare.io/kevinliozon/lead-product-designer-stack'
 }];
-
 /*** SIDENAVS FRAGMENTS ***/
-const projectFragments = [{
+
+var projectFragments = [{
   name: 'Specifics',
   label: 'Move to section about the specifics',
   href: '#specifics',
