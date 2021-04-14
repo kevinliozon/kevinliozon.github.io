@@ -243,9 +243,7 @@ var moduleRouter = function () {
 
 
         if (isIE()) {
-          window.scrollBy({
-            top: offsetPosition
-          });
+          window.scrollBy(offsetPosition, 0);
         } else {
           window.scrollBy({
             top: offsetPosition,
