@@ -1,40 +1,8 @@
 "use strict";
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
-  try {
-    var info = gen[key](arg);
-    var value = info.value;
-  } catch (error) {
-    reject(error);
-    return;
-  }
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
-  if (info.done) {
-    resolve(value);
-  } else {
-    Promise.resolve(value).then(_next, _throw);
-  }
-}
-
-function _asyncToGenerator(fn) {
-  return function () {
-    var self = this,
-        args = arguments;
-    return new Promise(function (resolve, reject) {
-      var gen = fn.apply(self, args);
-
-      function _next(value) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
-      }
-
-      function _throw(err) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
-      }
-
-      _next(undefined);
-    });
-  };
-}
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 var moduleRouter = function () {
   /**
@@ -260,7 +228,12 @@ var moduleRouter = function () {
       // Event listener on each link
       link.addEventListener('click', function (e) {
         // Scrolls to the content with matching fragment
-        document.getElementById(link.dataset.hash).scrollIntoView(); //This prevents the browser from actually following the default link
+        var elementPosition = document.getElementById(link.dataset.hash).getBoundingClientRect().top;
+        var offsetPosition = elementPosition - 100;
+        window.scrollBy({
+          top: offsetPosition,
+          behavior: "smooth"
+        }); //This prevents the browser from actually following the default link
 
         e.stopPropagation();
         e.preventDefault();
