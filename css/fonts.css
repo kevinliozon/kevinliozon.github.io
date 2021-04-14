@@ -67,16 +67,18 @@ body {
 input,
 select,
 textarea,
-button {
+button,
+a {
   font-family: inherit;
 }
 
 a {
-  font-family: 'Roboto Slab', sans-serif;
   font-weight: bold;
+  text-decoration: none;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Roboto', sans-serif;
   font-weight: bold;
+  margin: 1rem 0;
 }
