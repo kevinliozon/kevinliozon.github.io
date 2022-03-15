@@ -228,7 +228,29 @@ var moduleRouter = function () {
       // Event listener on each link
       link.addEventListener('click', function (e) {
         // Scrolls to the content with matching fragment
-        document.getElementById(link.dataset.hash).scrollIntoView(); //This prevents the browser from actually following the default link
+        var elementPosition = document.getElementById(link.dataset.hash).getBoundingClientRect().top;
+        var offsetPosition = elementPosition - 100;
+        /* Sample function that returns boolean in case the browser is Internet Explorer*/
+
+        function isIE() {
+          var ua = navigator.userAgent;
+          /* MSIE used to detect old browsers and Trident used to newer ones*/
+
+          var is_ie = ua.indexOf("MSIE ") > -1 || ua.indexOf("Trident/") > -1;
+          return is_ie;
+        }
+        /* Create an alert to show if the browser is IE or not */
+
+
+        if (isIE()) {
+          window.scrollBy(0, offsetPosition);
+        } else {
+          window.scrollBy({
+            top: offsetPosition,
+            behavior: "smooth"
+          });
+        } //This prevents the browser from actually following the default link
+
 
         e.stopPropagation();
         e.preventDefault();
