@@ -1,4 +1,10 @@
-'use strict';
+"use strict";
+
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
@@ -11,74 +17,115 @@ var moduleRouter = function () {
     * @param {String} activeTemplate The relative path to the template
     * @private
     */
-  async function _getPageController(activeTemplate) {
-    // Detect the last script in the list (previous page controller) and removes it
-    var lastScriptTag = document.getElementsByTagName('script')[document.getElementsByTagName('script').length - 1];
-    lastScriptTag.parentNode.removeChild(lastScriptTag);
-
-    // Create the script tag calling the controller of the new page
-    var scriptTag = document.createElement('script'); // create a script tag
-    scriptTag.type = 'text/javascript';
-    scriptTag.defer = true; // script is loaded when the page is parsed
-    scriptTag.async = false;
-    scriptTag.src = activeTemplate + '/index.js'; // set the source of the script to your script
-
-    try {
-      var response = await fetch(scriptTag.src, { method: 'GET' });
-      if (response.status !== 404) {
-        document.body.append(scriptTag); // append the script to the DOM
-      } else {
-        scriptTag.src = '';
-        document.body.append(scriptTag); // append the script to the DOM
-      }
-    } catch (error) {
-      return console.error('error:', error);
-    }
+  function _getPageController(_x) {
+    return _getPageController2.apply(this, arguments);
   }
-
   /**
     * Populate the wrapTemplate element with the HTML template for 404 errors
     * 
     * @private
     */
+
+
+  function _getPageController2() {
+    _getPageController2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(activeTemplate) {
+      var lastScriptTag, scriptTag, response;
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              // Detect the last script in the list (previous page controller) and removes it
+              lastScriptTag = document.getElementsByTagName('script')[document.getElementsByTagName('script').length - 1];
+              lastScriptTag.parentNode.removeChild(lastScriptTag); // Create the script tag calling the controller of the new page
+
+              scriptTag = document.createElement('script'); // create a script tag
+
+              scriptTag.type = 'text/javascript';
+              scriptTag.defer = true; // script is loaded when the page is parsed
+
+              scriptTag.async = false;
+              scriptTag.src = activeTemplate + '/index.js'; // set the source of the script to your script
+
+              _context.prev = 7;
+              _context.next = 10;
+              return fetch(scriptTag.src, {
+                method: 'GET'
+              });
+
+            case 10:
+              response = _context.sent;
+
+              if (response.status !== 404) {
+                document.body.append(scriptTag); // append the script to the DOM
+              } else {
+                scriptTag.src = '';
+                document.body.append(scriptTag); // append the script to the DOM
+              }
+
+              _context.next = 17;
+              break;
+
+            case 14:
+              _context.prev = 14;
+              _context.t0 = _context["catch"](7);
+              return _context.abrupt("return", console.error('error:', _context.t0));
+
+            case 17:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, null, [[7, 14]]);
+    }));
+    return _getPageController2.apply(this, arguments);
+  }
+
   function _getErrorPageTemplate() {
     _loadPage(true);
-    var activeTemplate = '/pages/error';
 
-    fetch(activeTemplate, { method: 'GET' }).then(function (response) {
+    var activeTemplate = '/pages/error';
+    fetch(activeTemplate, {
+      method: 'GET'
+    }).then(function (response) {
       return response.text(); // turn HTML response into a string
     }).then(function (content) {
       _buildPage(activeTemplate, 'Not found', location.origin + '#page=error', content, 'replace');
-    }).finally(function () {
+    })["finally"](function () {
       document.getElementById('errorComponent').appendChild(fallbackLinksComponent); // generates the fallback links once the page is created
-    }).catch(function (error) {
+    })["catch"](function (error) {
       return console.error('error:', error);
     });
   }
-
   /**
     * Build the page with current page's HTML template
     * 
     * @private
     */
+
+
   function _getCurrentPageTemplate() {
     _loadPage(true);
-    var activeTemplate = history.state.template;
-    // turn HTML response into a string
-    fetch(activeTemplate, { method: 'GET' }).then(function (response) {
+
+    var activeTemplate = history.state.template; // turn HTML response into a string
+
+    fetch(activeTemplate, {
+      method: 'GET'
+    }).then(function (response) {
       return response.text();
     }).then(function (content) {
       if (activeTemplate !== '/pages/error') {
         _buildPage(activeTemplate, history.state.page, history.state.url, content, 'replace');
       } else {
         _getErrorPageTemplate(); // Page we refresh is 404
+
       }
-    }).catch(function (error) {
+    })["catch"](function (error) {
       _getErrorPageTemplate(); // no template => 404 page
+
+
       console.error('error:', error);
     });
   }
-
   /**
     * Build the page with targeted HTML template
     * 
@@ -87,9 +134,14 @@ var moduleRouter = function () {
     * @param {String} activeUrl The relative url
     * @private
     */
+
+
   function _getPageTemplate(activeTemplate, activePage, activeUrl) {
     _loadPage(true);
-    fetch(activeTemplate, { method: 'GET' }).then(function (response) {
+
+    fetch(activeTemplate, {
+      method: 'GET'
+    }).then(function (response) {
       if (response.status !== 404) {
         return response.text(); // turn HTML response into a string
       } else {
@@ -97,12 +149,13 @@ var moduleRouter = function () {
       }
     }).then(function (content) {
       _buildPage(activeTemplate, activePage, activeUrl, content, 'push');
-    }).catch(function (error) {
+    })["catch"](function (error) {
       _getErrorPageTemplate(); // no template => 404 page
+
+
       console.error('error: ', error);
     });
   }
-
   /**
     * On first load/location.origin: calls home page's template
     * Or refresh: calls current page's template
@@ -111,6 +164,8 @@ var moduleRouter = function () {
     * 
     * @private
     */
+
+
   function _callTemplate() {
     if (location.href === location.origin + location.pathname || !history) {
       // If no page selected or there is no history registered, we fall back onto homepage
@@ -120,25 +175,28 @@ var moduleRouter = function () {
       history.state ? _getCurrentPageTemplate() : history.back();
     }
   }
-
   /**
     * @param {String} activePage The name of the active page
     * 
     * @private
     */
+
+
   function _setPageAsActive(activePage) {
     Array.from(document.getElementsByClassName('js-link--nav')).forEach(function (link) {
       link.classList.remove('u-active'); // removes any active state
+
       link.blur(); // removes any focus
 
       if (location.hash.indexOf('projects') > -1 && link.dataset.name.replace(/\s/g, '').toLowerCase() === 'projects') {
         link.classList.add('u-active'); // If we are on any project page it highlights the 'projects' menu item
       } else if (link.dataset.name.replace(/\s/g, '').toLowerCase() === activePage.replace(/\s/g, '').toLowerCase()) {
         link.classList.add('u-active'); // converts page's name to lowercase without spaces then adds active state to the relevant nav item
-      };
+      }
+
+      ;
     });
   }
-
   /**
     * We clear the previous anchor and make the new one active
     * @param {Object} activeHash The element of the active anchor
@@ -147,13 +205,15 @@ var moduleRouter = function () {
     * 
     * @private
     */
+
+
   function _setHashAsActive(activeHash, newHash) {
     activeHash.classList.remove('u-active'); // removes any active state
+
     activeHash = newHash;
     activeHash.classList.add('u-active');
     return activeHash;
   }
-
   /**
     * Is called on load
     * Set up the event listeners for the navigation and the generation of templates
@@ -162,6 +222,8 @@ var moduleRouter = function () {
     * @param {String} linkClass The class of the links we want to listen to
     * @private
     */
+
+
   function _linksListener(linkClass) {
     // Array with all navigation links
     Array.from(document.getElementsByClassName(linkClass)).forEach(function (link) {
@@ -172,14 +234,14 @@ var moduleRouter = function () {
           return;
         } else {
           _getPageTemplate(this.dataset.template, this.dataset.name, this.href);
-        }
-        //This prevents the browser from actually following the default link
+        } //This prevents the browser from actually following the default link
+
+
         e.stopPropagation();
         e.preventDefault();
       }, false);
     });
   }
-
   /**
     * Is called on load
     * Set up the event listeners for the anchor nav and scroll to the relevant content
@@ -188,48 +250,52 @@ var moduleRouter = function () {
     * @param {String} elId The id of the element we target
     * @private
     */
+
+
   function _hashListener(hashClass, elId) {
     // Active anchor/hash is the first one by default - we refer to the parent node for the styling which is <li>
     var activeHash = document.getElementsByClassName(hashClass)[1].parentNode; // [0] is skip to content
+
     var hashObserver = new IntersectionObserver(function (entries) {
       entries.forEach(function (el) {
         // isIntersecting is true when element and viewport are overlapping
         if (el.isIntersecting === true) {
           elId = el.target.id; // The element we target is the visible (75%) one 
+
           activeHash.classList.remove('u-active'); // reset all anchors
 
           Array.from(document.getElementsByClassName(hashClass)).forEach(function (hash) {
             hash.blur(); // removes any focus
             // If the value of an anchor is same as the value of the element we see
+
             if (hash.dataset.name === elId) {
               activeHash = _setHashAsActive(activeHash, hash.parentNode); // set active and update variable of the active anchor
             }
           });
         }
       });
-    }, { threshold: [0.75] });
+    }, {
+      threshold: [0.75]
+    }); // Array with all navigation links
 
-    // Array with all navigation links
     Array.from(document.getElementsByClassName(hashClass)).forEach(function (hash) {
       hash.parentNode.classList.remove('u-active'); // removes any active state
+
       activeHash.classList.add('u-active'); // reset all anchors
-
       // we observe elements using this id
-      hashObserver.observe(document.querySelector('#' + hash.dataset.name));
 
-      // Event listener on each hash
+      hashObserver.observe(document.querySelector('#' + hash.dataset.name)); // Event listener on each hash
+
       hash.addEventListener('click', function (e) {
         activeHash = _setHashAsActive(activeHash, hash.parentNode); // set active and update variable of the active anchor
-
         // The element, its position and the offset for scroll
+
         var el = document.getElementById(hash.dataset.name);
         var elementPosition = el.getBoundingClientRect().top;
-        var offsetPosition = elementPosition - 100;
+        var offsetPosition = elementPosition - 100; // We focus the element
 
-        // We focus the element
-        el.focus();
+        el.focus(); // Scrolls to the content with matching fragment
 
-        // Scrolls to the content with matching fragment
         if (isIE()) {
           window.scrollBy(0, offsetPosition);
         } else {
@@ -237,15 +303,14 @@ var moduleRouter = function () {
             top: offsetPosition,
             behavior: "smooth"
           });
-        }
+        } //This prevents the browser from actually following the default hash
 
-        //This prevents the browser from actually following the default hash
+
         e.stopPropagation();
         e.preventDefault();
       }, false);
     });
   }
-
   /**
     * Is called on hashchange or popstate event (back/forward)
     * Check if the page we try to access exists
@@ -254,10 +319,15 @@ var moduleRouter = function () {
     * 
     * @private
     */
+
+
   function _navStateOrHashChange() {
-    _loadPage(true);
-    // we check if the new url has got a corresponding template
-    fetch(location.href.replace('#page=', 'pages/'), { method: 'GET' }).then(function (response) {
+    _loadPage(true); // we check if the new url has got a corresponding template
+
+
+    fetch(location.href.replace('#page=', 'pages/'), {
+      method: 'GET'
+    }).then(function (response) {
       if (response.status !== 404) {
         return response.text(); // has a template
       } else {
@@ -267,14 +337,12 @@ var moduleRouter = function () {
       var newPageTemplateLocation = location.hash.replace('#page=', '/pages/');
 
       if (newPageTemplateLocation !== '/pages/error') {
-        var _iteratorNormalCompletion = true;
-        var _didIteratorError = false;
-        var _iteratorError = undefined;
+        var _iterator = _createForOfIteratorHelper(pages),
+            _step;
 
         try {
-          for (var _iterator = pages[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          for (_iterator.s(); !(_step = _iterator.n()).done;) {
             var page = _step.value;
-
             var pageTemplateToMatch = page.templatePath;
 
             if (newPageTemplateLocation === pageTemplateToMatch) {
@@ -282,28 +350,17 @@ var moduleRouter = function () {
             }
           }
         } catch (err) {
-          _didIteratorError = true;
-          _iteratorError = err;
+          _iterator.e(err);
         } finally {
-          try {
-            if (!_iteratorNormalCompletion && _iterator.return) {
-              _iterator.return();
-            }
-          } finally {
-            if (_didIteratorError) {
-              throw _iteratorError;
-            }
-          }
+          _iterator.f();
         }
 
-        var _iteratorNormalCompletion2 = true;
-        var _didIteratorError2 = false;
-        var _iteratorError2 = undefined;
+        var _iterator2 = _createForOfIteratorHelper(projects),
+            _step2;
 
         try {
-          for (var _iterator2 = projects[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+          for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
             var project = _step2.value;
-
             var projectTemplateToMatch = project.templatePath;
 
             if (newPageTemplateLocation === projectTemplateToMatch) {
@@ -311,26 +368,19 @@ var moduleRouter = function () {
             }
           }
         } catch (err) {
-          _didIteratorError2 = true;
-          _iteratorError2 = err;
+          _iterator2.e(err);
         } finally {
-          try {
-            if (!_iteratorNormalCompletion2 && _iterator2.return) {
-              _iterator2.return();
-            }
-          } finally {
-            if (_didIteratorError2) {
-              throw _iteratorError2;
-            }
-          }
+          _iterator2.f();
         }
       } else _getErrorPageTemplate(); // next/previous page was 404
-    }).catch(function (error) {
+
+    })["catch"](function (error) {
       _getErrorPageTemplate(); // no template => 404 page
+
+
       console.error('error: ', error);
     });
   }
-
   /**
     * Updates history
     * Populate the wrapTemplate element with the targeted HTML template
@@ -342,70 +392,85 @@ var moduleRouter = function () {
     * @param {String} historyState either push or replace
     * @private
     */
+
+
   function _buildPage(activeTemplate, activePage, activeUrl, content, historyState) {
     //This is where we update the address bar with the 'activeUrl' parameter
     switch (historyState) {
       case 'push':
-        window.history.pushState({ template: activeTemplate, page: activePage, url: activeUrl }, activePage, activeUrl);break;
+        window.history.pushState({
+          template: activeTemplate,
+          page: activePage,
+          url: activeUrl
+        }, activePage, activeUrl);
+        break;
+
       case 'replace':
-        window.history.replaceState({ template: activeTemplate, page: activePage, url: activeUrl }, activePage, activeUrl);break;
+        window.history.replaceState({
+          template: activeTemplate,
+          page: activePage,
+          url: activeUrl
+        }, activePage, activeUrl);
+        break;
+
       default:
-        console.error('Error: Push or Replace state not defined for history');break;
+        console.error('Error: Push or Replace state not defined for history');
+        break;
     }
 
     new Promise(function (resolve, reject) {
       // It is a project page AND we do not have an access token (false or null)
       if (activeUrl.indexOf('#page=projects/') > -1 && localStorage.getItem('access') !== 'true') {
         // We go throught the list of protected projects urls
-        var _iteratorNormalCompletion3 = true;
-        var _didIteratorError3 = false;
-        var _iteratorError3 = undefined;
+        var _iterator3 = _createForOfIteratorHelper(protectedProjectsUrls),
+            _step3;
 
         try {
-          for (var _iterator3 = protectedProjectsUrls[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+          for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
             var protectedProjectUrl = _step3.value;
 
             // Is the url of the current project among those that are protected ? if yes bring the password check component : if not build the page
             if (location.hash === protectedProjectUrl) {
-              _requestPassword();return; // we do not proceed with resolve
+              _requestPassword();
+
+              return; // we do not proceed with resolve
             }
           }
         } catch (err) {
-          _didIteratorError3 = true;
-          _iteratorError3 = err;
+          _iterator3.e(err);
         } finally {
-          try {
-            if (!_iteratorNormalCompletion3 && _iterator3.return) {
-              _iterator3.return();
-            }
-          } finally {
-            if (_didIteratorError3) {
-              throw _iteratorError3;
-            }
-          }
+          _iterator3.f();
         }
 
         resolve(); // Page is for project but is not protected
       } else if (!activeUrl) reject('The url does not exist');else resolve(); // Page is not for project OR we already have an access token
+
     }).then(function (result) {
       _loadPage(false);
 
       document.title = activePage; // Defines tab title
+
       wrapTemplate.innerHTML = content; // Fills the wrap with template
+
       _setPageAsActive(activePage); // Set page's link as active
+
+
       _getPageController(activeTemplate); // Adds template's controller
+
     }, function (err) {
-      console.error('error:', err);return;
-    }).finally(function () {
+      console.error('error:', err);
+      return;
+    })["finally"](function () {
       return moduleRouter.linksListener('js-link--content');
     });
   }
-
   /**
     * Fade in effect when changing or loading page
     * 
     * @private
     */
+
+
   function _contentTransitionAnimation() {
     var opacity = 0;
     var intervalID = setInterval(function () {
@@ -417,7 +482,6 @@ var moduleRouter = function () {
       }
     }, 25);
   }
-
   /**
     * Checks if no access token setting been applied from localstorage
     * - if no access or no value to accessToken key => set the access to false and returns false
@@ -427,6 +491,8 @@ var moduleRouter = function () {
     * @returns {Boolean} Confirms if we have or not been previously granted access
     * @private
     */
+
+
   function _getAccessToken(accessToken) {
     if (!accessToken || accessToken === 'false') {
       localStorage.setItem('access', 'false');
@@ -435,17 +501,20 @@ var moduleRouter = function () {
       return true;
     }
   }
-
   /**
     * The load page replaces the main container content
     * 
     * @param {Boolean} isLoading The loading state
     * @private
     */
+
+
   function _loadPage(isLoading) {
     window.scrollTo(0, 0); // since it is a single page website we need to reset the position to top of the screen
+
     if (isLoading) {
       _contentTransitionAnimation();
+
       wrapTemplate.innerHTML = '\
       <div class="l-float">\
         <div id="loadComponent" class="c-float">\
@@ -462,12 +531,13 @@ var moduleRouter = function () {
       _buildFallbackLinks(document.getElementById('loadComponent'));
     } else if (!isLoading) _contentTransitionAnimation();
   }
-
   /**
     * The password page replaces the main container content
     * 
     * @private
     */
+
+
   function _requestPassword() {
     wrapTemplate.innerHTML = '\
     <div class="l-float">\
@@ -496,59 +566,60 @@ var moduleRouter = function () {
         </p>\
       </div>\
     </div>';
-
     var accessForm = document.getElementById('form-access');
     var accessField = document.getElementById('form-password');
 
-    _buildFallbackLinks(document.getElementById('accessComponent'));
+    _buildFallbackLinks(document.getElementById('accessComponent')); // validate form on submit
 
-    // validate form on submit
+
     accessForm.addEventListener('submit', function (e) {
       var password = accessField.value;
 
       if (!accessForm.checkValidity()) {
         // form is invalid - cancel submit
         e.preventDefault(); // we prevent the default submission
+
         e.stopImmediatePropagation();
       } else if (accessForm.checkValidity() && password !== 'test') {
         // password is invalid - cancel submit
         e.preventDefault(); // we prevent the default submission
+
         e.stopImmediatePropagation();
         accessField.classList.add('is-invalid');
       } else if (accessForm.checkValidity() && password === 'test') {
         localStorage.setItem('access', 'true');
       }
-    });
+    }); // Confirmation alert before resetting form
 
-    // Confirmation alert before resetting form
     accessForm.addEventListener('reset', function (e) {
       if (confirm('You are about to reset the whole form. Are you happy to proceed?')) {
         accessForm.reset();
       } else {
         e.preventDefault(); // we prevent the default reset
+
         e.stopImmediatePropagation();
       }
     });
   }
-
   /**
     * Append a fallback list to a component
     * 
     * @param {Object} el The element of the component
     * @private
     */
-  function _buildFallbackLinks(el) {
-    el.appendChild(fallbackLinksComponent);
 
-    // Back button
+
+  function _buildFallbackLinks(el) {
+    el.appendChild(fallbackLinksComponent); // Back button
+
     document.getElementById('loadBack').addEventListener('click', function (e) {
       e.preventDefault();
       e.stopImmediatePropagation();
       history.back();
     });
   }
-
   /*** @public ***/
+
 
   function linksListener(linkClass) {
     _linksListener(linkClass);
