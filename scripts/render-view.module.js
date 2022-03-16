@@ -158,8 +158,6 @@ var moduleViewRenderer = function () {
 
 
   function _imagesListener(wrapTemplate, wrapModal) {
-    var _this = this;
-
     var observer = new MutationObserver(function () {
       var images = document.querySelectorAll('.js-img'); // all images we can interact with
       // If there is at least one image
@@ -170,12 +168,14 @@ var moduleViewRenderer = function () {
             _step4;
 
         try {
-          var _loop = function _loop() {
+          for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
             var imgWrap = _step4.value;
             // Event listener on each image
             imgWrap.addEventListener('click', function (e) {
-              if (_this.hasAttribute('data-slideindex')) {
-                var index = parseInt(_this.dataset.slideindex);
+              var imgSelected = e.target;
+
+              if (imgSelected.hasAttribute('data-slideindex')) {
+                var index = parseInt(imgSelected.dataset.slideindex);
 
                 var _iterator5 = _createForOfIteratorHelper(images),
                     _step5;
@@ -192,21 +192,16 @@ var moduleViewRenderer = function () {
                   _iterator5.f();
                 }
 
-                _this.classList.add('u-active'); // selected image is active
-
+                imgSelected.classList.add('u-active'); // selected image is active
 
                 _getViewSlide(index, document.body.querySelector('.c-slide[data-slide="' + index + '"]')); // the image we click on is a slider selector
 
               } else {
-                _getViewImageModal(wrapModal, imgWrap.querySelector('.c-fig__img'), imgWrap.querySelector('.c-fig__c'));
+                _getViewImageModal(wrapModal, imgSelected.querySelector('.c-fig__img'), imgSelected.querySelector('.c-fig__c'));
               }
 
               observer.disconnect(); // We can disconnect since images have been found
             }, false);
-          };
-
-          for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
-            _loop();
           }
         } catch (err) {
           _iterator4.e(err);
@@ -238,7 +233,7 @@ var moduleViewRenderer = function () {
         _step6;
 
     try {
-      var _loop2 = function _loop2() {
+      var _loop = function _loop() {
         var sidebarTrigger = _step6.value;
         sidebarTrigger.addEventListener('click', function (e) {
           if (sidebarTrigger === document.getElementById('burger-menu') && !isOpen) {
@@ -256,7 +251,7 @@ var moduleViewRenderer = function () {
       };
 
       for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
-        _loop2();
+        _loop();
       }
     } catch (err) {
       _iterator6.e(err);
