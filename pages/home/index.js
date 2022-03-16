@@ -1,4 +1,10 @@
-'use strict';
+"use strict";
+
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 /**
  * CONTROLLER FOR:
@@ -21,18 +27,18 @@ new Promise(function (resolve, reject) {
   }
 }).then(function (result) {
   slideIndex = 1; // first slide is 1 - don't remove
-  selectedSlideIndex = slideIndex; // reset default slide index
-  moduleViewRenderer.imagesListener(wrapTemplate, wrapModal); // Building the images listener
 
+  selectedSlideIndex = slideIndex; // reset default slide index
+
+  moduleViewRenderer.imagesListener(wrapTemplate, wrapModal); // Building the images listener
   // generate projects in grid
-  var _iteratorNormalCompletion = true;
-  var _didIteratorError = false;
-  var _iteratorError = undefined;
+
+  var _iterator = _createForOfIteratorHelper(projectsHome),
+      _step;
 
   try {
-    for (var _iterator = projectsHome[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+    for (_iterator.s(); !(_step = _iterator.n()).done;) {
       var project = _step.value;
-
       document.getElementById('grid').innerHTML += '\
     <article id="project-' + project.id + '" class="c-cell c-cell--lg">\
       <div class="c-cell__info">\
@@ -55,34 +61,21 @@ new Promise(function (resolve, reject) {
         <img src="' + project.img + '" alt="' + project.imgAlt + '" class="c-cell__img">\
       </figure>\
     </article>';
-
       moduleViewRenderer.getViewBadges(project.themes, document.getElementById('badges-' + project.id)); // generate badges
-    }
+    } // generate projects in carousel
 
-    // generate projects in carousel
   } catch (err) {
-    _didIteratorError = true;
-    _iteratorError = err;
+    _iterator.e(err);
   } finally {
-    try {
-      if (!_iteratorNormalCompletion && _iterator.return) {
-        _iterator.return();
-      }
-    } finally {
-      if (_didIteratorError) {
-        throw _iteratorError;
-      }
-    }
+    _iterator.f();
   }
 
-  var _iteratorNormalCompletion2 = true;
-  var _didIteratorError2 = false;
-  var _iteratorError2 = undefined;
+  var _iterator2 = _createForOfIteratorHelper(projectsCarousel),
+      _step2;
 
   try {
-    for (var _iterator2 = projectsCarousel[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+    for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
       var _project = _step2.value;
-
       document.getElementById('carouselSlider').innerHTML += '\
     <article id="slide-' + _project.id + '" class="c-slide" data-slide="' + slideIndex + '">\
       <div class="c-slide__info">\
@@ -105,41 +98,27 @@ new Promise(function (resolve, reject) {
         <img src="' + _project.img + '" alt="' + _project.imgAlt + '" class="c-slide__img">\
       </figure>\
     </article>';
-
       document.getElementById('carouselSelector').innerHTML += '\
     <button id="slideIndex-' + _project.id + '" class="c-btn c-slideselector__btn js-img" data-slideindex="' + slideIndex + '">\
       <img class="c-fig__img c-btn__img" src="' + _project.img + '" alt="' + _project.imgAlt + '">\
     </button>';
-
       slideIndex++; // slide increment by +1 for each additional one
 
       moduleViewRenderer.getViewBadges(_project.themes, document.getElementById('badges-' + _project.id)); // generate badges
-    }
+    } // generate brands
 
-    // generate brands
   } catch (err) {
-    _didIteratorError2 = true;
-    _iteratorError2 = err;
+    _iterator2.e(err);
   } finally {
-    try {
-      if (!_iteratorNormalCompletion2 && _iterator2.return) {
-        _iterator2.return();
-      }
-    } finally {
-      if (_didIteratorError2) {
-        throw _iteratorError2;
-      }
-    }
+    _iterator2.f();
   }
 
-  var _iteratorNormalCompletion3 = true;
-  var _didIteratorError3 = false;
-  var _iteratorError3 = undefined;
+  var _iterator3 = _createForOfIteratorHelper(brands),
+      _step3;
 
   try {
-    for (var _iterator3 = brands[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+    for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
       var brand = _step3.value;
-
       document.getElementById('brands').innerHTML += '\
     <figure id="brand-' + brand.id + '" class="c-fig c-section__i">\
       <img src="' + brand.img + '" alt="' + brand.imgAlt + '" class="c-fig__img">\
@@ -147,41 +126,37 @@ new Promise(function (resolve, reject) {
     </figure>';
     }
   } catch (err) {
-    _didIteratorError3 = true;
-    _iteratorError3 = err;
+    _iterator3.e(err);
   } finally {
-    try {
-      if (!_iteratorNormalCompletion3 && _iterator3.return) {
-        _iterator3.return();
-      }
-    } finally {
-      if (_didIteratorError3) {
-        throw _iteratorError3;
-      }
-    }
+    _iterator3.f();
   }
 }, function (err) {
   return console.error('error:', err);
-}).finally(function () {
+})["finally"](function () {
   /* variables */
   var prevBtn = document.getElementById('sliderPrev');
   var nextBtn = document.getElementById('sliderNext');
   var slideThumbs = document.querySelectorAll('.c-slideselector__btn'); // Get a NodeList of all .c-slide elements
-  var slideThumbActive = document.body.querySelector('.c-slideselector__btn[data-slideindex="' + selectedSlideIndex + '"]'); // Get the slide with equivalent index
-  var slideToDisplay = document.body.querySelector('.c-slide[data-slide="' + selectedSlideIndex + '"]');
 
+  var slideThumbActive = document.body.querySelector('.c-slideselector__btn[data-slideindex="' + selectedSlideIndex + '"]'); // Get the slide with equivalent index
+
+  var slideToDisplay = document.body.querySelector('.c-slide[data-slide="' + selectedSlideIndex + '"]');
   /* modules */
+
   moduleRouter.linksListener('js-link--content');
   moduleViewRenderer.getViewSlide(selectedSlideIndex, slideToDisplay); // default thumbnail selected
 
   /* set default */
+
   prevBtn.disabled = true; // when page load, prev button is disabled
+
   slideThumbActive.classList.add('u-active'); // when page load, first item is active
 
   prevBtn.addEventListener('click', function (e) {
     // We can go to previous as long as the first slide is not selected
     if (selectedSlideIndex > 1) {
       nextBtn.disabled = false; // enables next button
+
       selectedSlideIndex -= 1; // decrement of 1
 
       if (selectedSlideIndex <= 1) {
@@ -189,18 +164,20 @@ new Promise(function (resolve, reject) {
       }
 
       slideToDisplay = document.body.querySelector('.c-slide[data-slide="' + selectedSlideIndex + '"]'); // update slide by dataset
+
       moduleViewRenderer.getActiveSlideThumbnail(slideThumbs, slideThumbActive, selectedSlideIndex); // highlights thumbnail
+
       moduleViewRenderer.getViewSlide(selectedSlideIndex, slideToDisplay); // displays slide
     } else {
       prevBtn.disabled = true;
     }
   });
-
   nextBtn.addEventListener('click', function (e) {
     // we use the number of thumbnails as a reference for the max number of slides
     // As long as index below that value then we can go to the next
     if (selectedSlideIndex < slideThumbs.length) {
       prevBtn.disabled = false; // enables prev button
+
       selectedSlideIndex += 1; // increment of 1
 
       if (selectedSlideIndex >= slideThumbs.length) {
@@ -208,7 +185,9 @@ new Promise(function (resolve, reject) {
       }
 
       slideToDisplay = document.body.querySelector('.c-slide[data-slide="' + selectedSlideIndex + '"]'); // targets slide by dataset
+
       moduleViewRenderer.getActiveSlideThumbnail(slideThumbs, slideThumbActive, selectedSlideIndex); // highlights thumbnail
+
       moduleViewRenderer.getViewSlide(selectedSlideIndex, slideToDisplay); // displays slide
     } else {
       nextBtn.disabled = true;
