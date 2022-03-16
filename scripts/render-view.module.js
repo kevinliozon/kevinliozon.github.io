@@ -14,7 +14,6 @@ var moduleViewRenderer = function () {
    * @param {Object} wrapView The element where the content should be injected
    */
   function _getViewTemplate(activeTemplate, wrapView) {
-    wrapView.innerHTML = 'loading...';
     fetch(activeTemplate, {
       method: 'GET'
     }).then(function (response) {
@@ -86,9 +85,21 @@ var moduleViewRenderer = function () {
     var slides = document.querySelectorAll('.c-slide'); // Get a NodeList of all .c-slide elements
 
     selectedSlideIndex = index;
-    slides.forEach(function (slide) {
-      return slide.style.display = 'none';
-    }); // Hide all slides
+
+    var _iterator2 = _createForOfIteratorHelper(slides),
+        _step2;
+
+    try {
+      for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+        var slide = _step2.value;
+        slide.style.display = 'none';
+      } // Hide all slides
+
+    } catch (err) {
+      _iterator2.e(err);
+    } finally {
+      _iterator2.f();
+    }
 
     if (index === 1) {
       document.getElementById('sliderPrev').disabled = true; // if first slide, prev button is disabled
@@ -117,9 +128,20 @@ var moduleViewRenderer = function () {
 
 
   function _getActiveSlideThumbnail(slideThumbs, slideThumbActive, selectedSlideIndex) {
-    slideThumbs.forEach(function (slideThumb) {
-      return slideThumb.classList.remove('u-active');
-    }); // all images are not active anymore
+    var _iterator3 = _createForOfIteratorHelper(slideThumbs),
+        _step3;
+
+    try {
+      for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+        var slideThumb = _step3.value;
+        slideThumb.classList.remove('u-active');
+      } // all images are not active anymore
+
+    } catch (err) {
+      _iterator3.e(err);
+    } finally {
+      _iterator3.f();
+    }
 
     slideThumbActive = document.body.querySelector('.c-slideselector__btn[data-slideindex="' + selectedSlideIndex + '"]'); // Get the slide with equivalent index
 
@@ -136,32 +158,61 @@ var moduleViewRenderer = function () {
 
 
   function _imagesListener(wrapTemplate, wrapModal) {
+    var _this = this;
+
     var observer = new MutationObserver(function () {
       var images = document.querySelectorAll('.js-img'); // all images we can interact with
       // If there is at least one image
 
       if (images.length > 0) {
         // Array with all image links
-        images.forEach(function (imgWrap) {
-          // Event listener on each image
-          imgWrap.addEventListener('click', function (e) {
-            if (this.hasAttribute('data-slideindex')) {
-              var index = parseInt(this.dataset.slideindex);
-              images.forEach(function (img) {
-                return img.classList.remove('u-active');
-              }); // all images are not active anymore
+        var _iterator4 = _createForOfIteratorHelper(images),
+            _step4;
 
-              this.classList.add('u-active'); // selected image is active
+        try {
+          var _loop = function _loop() {
+            var imgWrap = _step4.value;
+            // Event listener on each image
+            imgWrap.addEventListener('click', function (e) {
+              if (_this.hasAttribute('data-slideindex')) {
+                var index = parseInt(_this.dataset.slideindex);
 
-              _getViewSlide(index, document.body.querySelector('.c-slide[data-slide="' + index + '"]')); // the image we click on is a slider selector
+                var _iterator5 = _createForOfIteratorHelper(images),
+                    _step5;
 
-            } else {
-              _getViewImageModal(wrapModal, imgWrap.querySelector('.c-fig__img'), imgWrap.querySelector('.c-fig__c'));
-            }
+                try {
+                  for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+                    var img = _step5.value;
+                    img.classList.remove('u-active');
+                  } // all images are not active anymore
 
-            observer.disconnect(); // We can disconnect since images have been found
-          }, false);
-        });
+                } catch (err) {
+                  _iterator5.e(err);
+                } finally {
+                  _iterator5.f();
+                }
+
+                _this.classList.add('u-active'); // selected image is active
+
+
+                _getViewSlide(index, document.body.querySelector('.c-slide[data-slide="' + index + '"]')); // the image we click on is a slider selector
+
+              } else {
+                _getViewImageModal(wrapModal, imgWrap.querySelector('.c-fig__img'), imgWrap.querySelector('.c-fig__c'));
+              }
+
+              observer.disconnect(); // We can disconnect since images have been found
+            }, false);
+          };
+
+          for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+            _loop();
+          }
+        } catch (err) {
+          _iterator4.e(err);
+        } finally {
+          _iterator4.f();
+        }
       }
     });
     observer.observe(wrapTemplate, {
@@ -183,12 +234,12 @@ var moduleViewRenderer = function () {
     var burger = document.getElementById('burger-menu');
     var isOpen = false; // we list all the elements that handle the side menu toggling (both open and close)
 
-    var _iterator2 = _createForOfIteratorHelper(document.querySelectorAll('#content, #header, #footer, #burger-menu, .js-link--hash')),
-        _step2;
+    var _iterator6 = _createForOfIteratorHelper(document.querySelectorAll('#content, #header, #footer, #burger-menu, .js-link--hash')),
+        _step6;
 
     try {
-      var _loop = function _loop() {
-        var sidebarTrigger = _step2.value;
+      var _loop2 = function _loop2() {
+        var sidebarTrigger = _step6.value;
         sidebarTrigger.addEventListener('click', function (e) {
           if (sidebarTrigger === document.getElementById('burger-menu') && !isOpen) {
             // Are we interracting with the burger menu icon while the menu is closed?
@@ -204,13 +255,13 @@ var moduleViewRenderer = function () {
         });
       };
 
-      for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-        _loop();
+      for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
+        _loop2();
       }
     } catch (err) {
-      _iterator2.e(err);
+      _iterator6.e(err);
     } finally {
-      _iterator2.f();
+      _iterator6.f();
     }
   }
   /*** @public METHODS ***/
