@@ -172,7 +172,9 @@ var moduleViewRenderer = function () {
             var imgWrap = _step4.value;
             // Event listener on each image
             imgWrap.addEventListener('click', function (e) {
-              var imgSelected = e.target;
+              e.preventDefault();
+              e.stopImmediatePropagation();
+              var imgSelected = e.currentTarget; // target is the inner part, currentTarget is the button itself
 
               if (imgSelected.hasAttribute('data-slideindex')) {
                 var index = parseInt(imgSelected.dataset.slideindex);
@@ -197,7 +199,7 @@ var moduleViewRenderer = function () {
                 _getViewSlide(index, document.body.querySelector('.c-slide[data-slide="' + index + '"]')); // the image we click on is a slider selector
 
               } else {
-                _getViewImageModal(wrapModal, imgSelected.querySelector('.c-fig__img'), imgSelected.querySelector('.c-fig__c'));
+                _getViewImageModal(wrapModal, imgSelected.querySelector('.js-img .c-fig__img'), imgSelected.querySelector('.js-img .c-fig__c'));
               }
 
               observer.disconnect(); // We can disconnect since images have been found
