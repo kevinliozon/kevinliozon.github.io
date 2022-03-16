@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 var moduleCommands = function () {
   /**
@@ -8,33 +8,45 @@ var moduleCommands = function () {
     * @private
     */
   function _commandsListener(commandClass) {
-    // Array with all command buttons
-    Array.from(document.getElementsByClassName(commandClass)).forEach(function (cmd) {
+    var _loop = function _loop() {
+      var cmd = _Array$from[_i];
       // Event listener on each button
       cmd.addEventListener('click', function (e) {
         switch (cmd.dataset.command) {
           case 'back':
             history.back();
             break;
+
           case 'forward':
             history.forward();
             break;
+
           case 'top':
             _scrollToTop();
+
             break;
+
           case 'tint':
             _changeTheme();
+
             break;
+
           case 'textsize':
             _changeFontSize();
+
             break;
+
           default:
-            console.log('Sorry, we are out of ' + cmd.dataset.command + '.');
+            console.log("Sorry, we are out of ".concat(cmd.dataset.command, "."));
         }
       }, false);
-    });
-  }
+    };
 
+    // Array with all command buttons
+    for (var _i = 0, _Array$from = Array.from(document.getElementsByClassName(commandClass)); _i < _Array$from.length; _i++) {
+      _loop();
+    }
+  }
   /**
     * Is called on load
     * Checks if no UI settings have been applied from localstorage
@@ -44,6 +56,8 @@ var moduleCommands = function () {
     * @param {String} activeFont The localstorage item value for font
     * @private
     */
+
+
   function _getSettings(activeTheme, activeFont) {
     if (!activeTheme) {
       localStorage.setItem('theme', 'light');
@@ -52,10 +66,13 @@ var moduleCommands = function () {
         case 'dark':
           wrapBody.classList.add('t-dark');
           break;
+
         default:
-          console.log('Theme is ' + activeTheme + '.');
+          console.log("Theme is ".concat(activeTheme, "."));
       }
-    };
+    }
+
+    ;
 
     if (!activeFont) {
       localStorage.setItem('font', 'normal');
@@ -66,34 +83,43 @@ var moduleCommands = function () {
           wrapBody.classList.add('t-fontbig');
           fontSizeCount.innerHTML = 'x2';
           break;
+
         case 'bigger':
           wrapBody.classList.add('t-fontbigger');
           fontSizeCount.innerHTML = 'x3';
           break;
-        default:
-          console.log('Font is ' + activeFont + '.');
-      }
-    };
-  }
 
+        default:
+          console.log("Font is ".concat(activeFont, "."));
+      }
+    }
+
+    ;
+  }
   /**
    * Scroll to top of the page
    * @private
    */
+
+
   function _scrollToTop() {
     if (isIE()) {
       window.scrollTo(0);
     } else {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
     }
   }
-
   /**
    * Check if the theme is already light with localStorage
    * - if yes => set the localStorage to dark and add a dark theme class to body
    * - if no => set the localStorage to light and remove dark theme class from body
    * @private
    */
+
+
   function _changeTheme() {
     if (localStorage.getItem('theme') === 'light') {
       localStorage.setItem('theme', 'dark');
@@ -103,7 +129,6 @@ var moduleCommands = function () {
       wrapBody.classList.remove('t-dark');
     }
   }
-
   /**
    * Check the font size with localStorage
    * - if normal => set the localStorage to big and add a big font theme class to body
@@ -111,6 +136,8 @@ var moduleCommands = function () {
    * - if bigger => set the localStorage to normal and remove bigger theme class from body
    * @private
    */
+
+
   function _changeFontSize() {
     switch (localStorage.getItem('font')) {
       case 'normal':
@@ -118,22 +145,24 @@ var moduleCommands = function () {
         wrapBody.classList.add('t-fontbig');
         fontSizeCount.innerHTML = 'x2';
         break;
+
       case 'big':
         localStorage.setItem('font', 'bigger');
         wrapBody.classList.remove('t-fontbig');
         wrapBody.classList.add('t-fontbigger');
         fontSizeCount.innerHTML = 'x3';
         break;
+
       case 'bigger':
         localStorage.setItem('font', 'normal');
         wrapBody.classList.remove('t-fontbigger');
         fontSizeCount.innerHTML = 'x1';
         break;
+
       default:
-        console.log('Sorry, we are out of ' + this.dataset.command + '.');
+        console.log("Sorry, we are out of ".concat(this.dataset.command, "."));
     }
   }
-
   /**
    * Close modal window when visible
    * 
@@ -141,17 +170,18 @@ var moduleCommands = function () {
    * @param {Object} modalClose the modal close button
    * @private
    */
+
+
   function _closeViewModal(modalContainer, modalClose) {
     modalClose.addEventListener('click', function (e) {
       modalContainer.style.display = 'none';
     }, false);
-
     modalContainer.addEventListener('click', function (e) {
       modalContainer.style.display = 'none';
     }, false);
   }
-
   /*** @public ***/
+
 
   function commandsListener(commandClass) {
     _commandsListener(commandClass);
