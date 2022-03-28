@@ -661,13 +661,17 @@ var moduleRouter = function () {
 
   function _buildFallbackLinks(el) {
     if (el) {
-      el.appendChild(fallbackLinksComponent); // Back button
+      el.appendChild(fallbackLinksComponent);
+      var backLink = document.getElementById('loadBack');
 
-      document.getElementById('loadBack').addEventListener('click', function (e) {
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        history.back();
-      });
+      if (backLink) {
+        // Back button
+        backLink.addEventListener('click', function (e) {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          history.back();
+        });
+      }
     }
   }
   /*** @public ***/
