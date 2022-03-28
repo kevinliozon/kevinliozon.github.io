@@ -378,7 +378,7 @@ var moduleRouter = function () {
     }).then(function (content) {
       var newPageTemplateLocation = location.hash.replace('#page=', '/pages/');
 
-      if (newPageTemplateLocation !== '/pages/error') {
+      if (newPageTemplateLocation !== '/pages/error/' || newPageTemplateLocation !== '/pages/error') {
         var _iterator4 = _createForOfIteratorHelper(pages),
             _step4;
 
@@ -387,8 +387,8 @@ var moduleRouter = function () {
             var page = _step4.value;
             var pageTemplateToMatch = page.templatePath;
 
-            if (newPageTemplateLocation === pageTemplateToMatch) {
-              _buildPage(pageTemplateToMatch, page.name, page.href, content, 'replace');
+            if (newPageTemplateLocation === pageTemplateToMatch || newPageTemplateLocation === pageTemplateToMatch + '/') {
+              _buildPage(newPageTemplateLocation, page.name, page.href, content, 'replace');
             }
           }
         } catch (err) {
@@ -405,8 +405,8 @@ var moduleRouter = function () {
             var project = _step5.value;
             var projectTemplateToMatch = project.templatePath;
 
-            if (newPageTemplateLocation === projectTemplateToMatch) {
-              _buildPage(projectTemplateToMatch, project.name, project.href, content, 'replace');
+            if (newPageTemplateLocation === projectTemplateToMatch || newPageTemplateLocation === projectTemplateToMatch + '/') {
+              _buildPage(newPageTemplateLocation, project.name, project.href, content, 'replace');
             }
           }
         } catch (err) {
@@ -592,7 +592,7 @@ var moduleRouter = function () {
         <p class="c-float__d">\
           Please <a class="js-link c-link" href="#page=contact" target="_top" data-template="/pages/contact" data-name="Contact" aria-label="Contact page">contact me</a> to get an access token.\
         </p>\
-        <form class="c-float__form" id="form-access" name="PasswordField" action="">\
+        <form class="c-float__form" id="form-access" name="PasswordField" method="post" action="">\
           <div class="c-form__field">\
             <label class="c-form__label" for="form-password">Password</label>\
             <input id="form-password" class="c-form__input" type="password" name="password" minlength="1" placeholder="e.g. aBc3?#0O" required>\
