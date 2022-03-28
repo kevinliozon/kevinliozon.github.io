@@ -91,7 +91,19 @@ var moduleRouter = function () {
     }).then(function (content) {
       _buildPage(activeTemplate, 'Not found', location.origin + '#page=error', content, 'replace');
     })["finally"](function () {
-      document.getElementById('errorComponent').appendChild(fallbackLinksComponent); // generates the fallback links once the page is created
+      var errorComponent = document.getElementById('errorComponent');
+      errorComponent.appendChild(fallbackLinksComponent); // generates the fallback links once the page is created
+
+      var backLink = document.getElementById('loadBack');
+
+      if (backLink) {
+        // Back button
+        backLink.addEventListener('click', function (e) {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          history.back();
+        });
+      }
     })["catch"](function (error) {
       return console.error('error:', error);
     });
@@ -111,14 +123,13 @@ var moduleRouter = function () {
     fetch(activeTemplate, {
       method: 'GET'
     }).then(function (response) {
-      return response.text();
-    }).then(function (content) {
-      if (activeTemplate !== '/pages/error') {
-        _buildPage(activeTemplate, history.state.page, history.state.url, content, 'replace');
+      if (response.status !== 404 && location.hash.indexOf('#page=error') === -1) {
+        return response.text(); // has a template
       } else {
-        _getErrorPageTemplate(); // Page we refresh is 404
-
+        throw new Error('No template for this page - 404');
       }
+    }).then(function (content) {
+      _buildPage(activeTemplate, history.state.page, history.state.url, content, 'replace');
     })["catch"](function (error) {
       _getErrorPageTemplate(); // no template => 404 page
 
@@ -370,7 +381,7 @@ var moduleRouter = function () {
     fetch(location.href.replace('#page=', 'pages/'), {
       method: 'GET'
     }).then(function (response) {
-      if (response.status !== 404) {
+      if (response.status !== 404 && location.hash.indexOf('#page=error') === -1) {
         return response.text(); // has a template
       } else {
         throw new Error('No template for this page - 404');
@@ -378,44 +389,41 @@ var moduleRouter = function () {
     }).then(function (content) {
       var newPageTemplateLocation = location.hash.replace('#page=', '/pages/');
 
-      if (newPageTemplateLocation !== '/pages/error/' || newPageTemplateLocation !== '/pages/error') {
-        var _iterator4 = _createForOfIteratorHelper(pages),
-            _step4;
+      var _iterator4 = _createForOfIteratorHelper(pages),
+          _step4;
 
-        try {
-          for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
-            var page = _step4.value;
-            var pageTemplateToMatch = page.templatePath;
+      try {
+        for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+          var page = _step4.value;
+          var pageTemplateToMatch = page.templatePath;
 
-            if (newPageTemplateLocation === pageTemplateToMatch || newPageTemplateLocation === pageTemplateToMatch + '/') {
-              _buildPage(newPageTemplateLocation, page.name, page.href, content, 'replace');
-            }
+          if (newPageTemplateLocation === pageTemplateToMatch || newPageTemplateLocation === pageTemplateToMatch + '/') {
+            _buildPage(newPageTemplateLocation, page.name, page.href, content, 'replace');
           }
-        } catch (err) {
-          _iterator4.e(err);
-        } finally {
-          _iterator4.f();
         }
+      } catch (err) {
+        _iterator4.e(err);
+      } finally {
+        _iterator4.f();
+      }
 
-        var _iterator5 = _createForOfIteratorHelper(projects),
-            _step5;
+      var _iterator5 = _createForOfIteratorHelper(projects),
+          _step5;
 
-        try {
-          for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
-            var project = _step5.value;
-            var projectTemplateToMatch = project.templatePath;
+      try {
+        for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+          var project = _step5.value;
+          var projectTemplateToMatch = project.templatePath;
 
-            if (newPageTemplateLocation === projectTemplateToMatch || newPageTemplateLocation === projectTemplateToMatch + '/') {
-              _buildPage(newPageTemplateLocation, project.name, project.href, content, 'replace');
-            }
+          if (newPageTemplateLocation === projectTemplateToMatch || newPageTemplateLocation === projectTemplateToMatch + '/') {
+            _buildPage(newPageTemplateLocation, project.name, project.href, content, 'replace');
           }
-        } catch (err) {
-          _iterator5.e(err);
-        } finally {
-          _iterator5.f();
         }
-      } else _getErrorPageTemplate(); // next/previous page was 404
-
+      } catch (err) {
+        _iterator5.e(err);
+      } finally {
+        _iterator5.f();
+      }
     })["catch"](function (error) {
       _getErrorPageTemplate(); // no template => 404 page
 
@@ -571,8 +579,8 @@ var moduleRouter = function () {
           </header>\
         </div>\
       </div>';
-
-      _buildFallbackLinks(document.getElementById('loadComponent'));
+      var loadComponent = document.getElementById('loadComponent');
+      if (loadComponent) _buildFallbackLinks(loadComponent);
     } else if (!isLoading) _contentTransitionAnimation();
   }
   /**
@@ -610,11 +618,10 @@ var moduleRouter = function () {
         </p>\
       </div>\
     </div>';
+    var accessComponent = document.getElementById('accessComponent');
     var accessForm = document.getElementById('form-access');
     var accessField = document.getElementById('form-password');
-
-    _buildFallbackLinks(document.getElementById('accessComponent')); // validate form on submit
-
+    if (accessComponent) _buildFallbackLinks(accessComponent); // validate form on submit
 
     accessForm.addEventListener('submit', function (e) {
       var password = accessField.value;
