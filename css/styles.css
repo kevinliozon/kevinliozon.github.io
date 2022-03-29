@@ -474,6 +474,13 @@ html {
   margin: 0 0.5rem;
 }
 
+.l-header__ctrl {
+  display: block;
+  flex-basis: 0px;
+  flex-grow: 1;
+  text-align: center;
+}
+
 .is-mobile {
   display: none;
 }
@@ -837,9 +844,6 @@ html {
 
   .l-header__ctrl {
     display: block;
-    flex-basis: 0px;
-    flex-grow: 1;
-    text-align: center;
   }
 
   .l-header__logo {
