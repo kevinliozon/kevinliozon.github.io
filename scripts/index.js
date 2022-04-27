@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /*** CONTAINERS ***/
 var wrapBody = document.body;
@@ -12,35 +12,34 @@ var wrapModal = {
   caption: document.getElementById('modalCaption'),
   image: document.getElementById('modalImage')
 };
-
 /*** COUNTS ***/
+
 var fontSizeCount = document.getElementById('fontSize');
 var slideIndex = 1;
 var selectedSlideIndex = 1;
-
 /**
  * On load or refresh:
  * - Build the header and footer navs as well as their respective listeners
  * - Call the template
  */
+
 window.addEventListener('load', function (e) {
   // Building the navigations
   moduleNav.buildNavMain();
-  moduleNav.buildNavAlt();
-  // Building the navigation listener
-  moduleRouter.linksListener('js-link--nav');
-  // Checks if user has already succesfuly accessed to password protected pages
-  moduleRouter.getAccessToken(localStorage.getItem('access'));
-  // Building the command listener
-  moduleCommands.commandsListener('js-btn');
-  // Checks if UI settings have been defined
-  moduleCommands.getSettings(localStorage.getItem('theme'), localStorage.getItem('font'));
-  // Building the listeners for closing modals
-  moduleCommands.closeViewModal(wrapModal.container, wrapModal.close);
-  // Calls the template relevant to the page we are loading from
+  moduleNav.buildNavAlt(); // Building the navigation listener
+
+  moduleRouter.linksListener('js-link--nav'); // Checks if user has already succesfuly accessed to password protected pages
+
+  moduleRouter.getAccessToken(localStorage.getItem('access')); // Building the command listener
+
+  moduleCommands.commandsListener('js-btn'); // Checks if UI settings have been defined
+
+  moduleCommands.getSettings(localStorage.getItem('theme'), localStorage.getItem('font')); // Building the listeners for closing modals
+
+  moduleCommands.closeViewModal(wrapModal.container, wrapModal.close); // Calls the template relevant to the page we are loading from
+
   moduleRouter.callTemplate();
 });
-
 /**
  * On change in the url or upon state change
  * We cannot force the url to inject the root wrap (with header/wrap/footer) within itself: when hash === "#page="
@@ -50,6 +49,7 @@ window.addEventListener('load', function (e) {
  * - page selected is valid and contains a fragment: Scroll to fragment
  * - page selected is invalid: 404
  */
+
 window.addEventListener('hashchange', function (e) {
   if (location.hash.indexOf('#page=') > -1 && location.hash !== '#page=') {
     // If the hash contains the string '#page=' but does not match it (root folder)
@@ -65,12 +65,12 @@ window.addEventListener('hashchange', function (e) {
     moduleRouter.getErrorPageTemplate(); // no template => 404 page
   }
 }, false);
-
 /* Sample function that returns boolean in case the browser is Internet Explorer*/
+
 function isIE() {
   var ua = navigator.userAgent;
   /* MSIE used to detect old browsers and Trident used to newer ones*/
-  var is_ie = ua.indexOf("MSIE ") > -1 || ua.indexOf("Trident/") > -1;
 
+  var is_ie = ua.indexOf("MSIE ") > -1 || ua.indexOf("Trident/") > -1;
   return is_ie;
 }

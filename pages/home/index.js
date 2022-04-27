@@ -49,7 +49,7 @@ new Promise(function (resolve, reject) {
             aria-label="' + project.label + '"\
             data-template="' + project.templatePath + '"\
             data-name="' + project.name + '"\
-            target="_top">' + project.label + '</a>\
+            target="_top">' + project.name + '</a>\
           </h3>\
         </header>\
         <footer class="c-cell__footer">\
@@ -86,7 +86,7 @@ new Promise(function (resolve, reject) {
             aria-label="' + _project.label + '"\
             data-template="' + _project.templatePath + '"\
             data-name="' + _project.name + '"\
-            target="_top">' + _project.label + '</a>\
+            target="_top">' + _project.name + '</a>\
           </h3>\
         </header>\
         <footer class="c-slide__footer">\
@@ -121,8 +121,7 @@ new Promise(function (resolve, reject) {
       var brand = _step3.value;
       document.getElementById('brands').innerHTML += '\
     <figure id="brand-' + brand.id + '" class="c-fig c-section__i">\
-      <img src="' + brand.img + '" alt="' + brand.imgAlt + '" class="c-fig__img">\
-      <figcaption class="c-fig__c">' + brand.name + '</figcaption>\
+        <img src="' + brand.img + '" alt="' + brand.imgAlt + '" class="c-fig__img">\
     </figure>';
     }
   } catch (err) {

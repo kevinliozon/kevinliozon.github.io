@@ -98,7 +98,6 @@ html {
 }
 
 .c-jumbo {
-  background: url(/assets/img/placeholder.jpg) center / cover no-repeat;
   display: flex;
   margin-top: -12rem;
   padding: 12rem 6rem 6rem;
@@ -242,13 +241,6 @@ html {
   color: #82F4B6;
 }
 
-.c-fig.c-section__i {
-  max-width: 20rem;
-  min-width: 10rem;
-  padding: 1rem;
-  width: 15%;
-}
-
 .c-grid {
   display: flex;
   flex-basis: 80%;
@@ -292,9 +284,9 @@ html {
 #radio-all:checked ~ .c-grid .c-cell.is-content,
 #radio-featured:checked ~ .c-grid .c-cell.is-featured,
 #radio-manage:checked ~ .c-grid .c-cell.is-manage,
-#radio-tools:checked ~ .c-grid .c-cell.is-tools,
+#radio-tool:checked ~ .c-grid .c-cell.is-tool,
 #radio-doc:checked ~ .c-grid .c-cell.is-doc,
-#radio-proj:checked ~ .c-grid .c-cell.is-proj {
+#radio-design:checked ~ .c-grid .c-cell.is-design {
   display: flex;
 }
 
@@ -308,6 +300,10 @@ html {
 .c-cell__info,
 .c-slide__info {
   z-index: 1; /* makes the shadow visible */
+}
+
+.c-cell__info {
+  height: 21.1rem;
 }
 
 .c-cell__title,
@@ -472,6 +468,12 @@ html {
 .c-nav__link,
 .l-header__ctrl {
   margin: 0 0.5rem;
+}
+
+
+.c-nav__link {
+  padding: 1rem;
+  transition: all .1s ease-in;
 }
 
 .l-header__ctrl {
@@ -807,10 +809,14 @@ html {
     justify-content: space-around;
     padding: 0 1rem;
   }
+
+  .c-nav.l-header__nav {
+    padding-right: 0;
+  }
   
   .l-footer {
-    height: 24rem;
-    padding-bottom: 14rem;
+    height: 32rem;
+    padding-bottom: 18rem;
   }
 
   .c-section {

@@ -1,86 +1,107 @@
-'use strict';
+"use strict";
 
 /*** PAGES - Home page should be first ***/
 var pages = [{
   name: 'Home',
   label: 'Navigate to overview page',
+
   get href() {
     return '#page=' + this.name.replace(/\s/g, '').toLowerCase();
   },
+
   get templatePath() {
     return '/pages/' + this.name.replace(/\s/g, '').toLowerCase();
   },
+
   isMain: true,
   isVisible: true
 }, {
   name: 'About',
   label: 'Navigate to this page to learn more about my education, previous roles and ethics',
+
   get href() {
     return '#page=' + this.name.replace(/\s/g, '').toLowerCase();
   },
+
   get templatePath() {
     return '/pages/' + this.name.replace(/\s/g, '').toLowerCase();
   },
+
   isMain: true,
   isVisible: false
 }, {
   name: 'Projects',
   label: 'Navigate to this page to see some case studies from previous projects',
+
   get href() {
     return '#page=' + this.name.replace(/\s/g, '').toLowerCase();
   },
+
   get templatePath() {
     return '/pages/' + this.name.replace(/\s/g, '').toLowerCase();
   },
+
   isMain: true,
   isVisible: true
 }, {
   name: 'Contact',
   label: 'Navigate to contact page',
+
   get href() {
     return '#page=' + this.name.replace(/\s/g, '').toLowerCase();
   },
+
   get templatePath() {
     return '/pages/' + this.name.replace(/\s/g, '').toLowerCase();
   },
+
   isMain: true,
   isVisible: true
 }, {
   name: 'Sitemap',
   label: 'Navigate to the sitemap page',
+
   get href() {
     return '#page=' + this.name.replace(/\s/g, '').toLowerCase();
   },
+
   get templatePath() {
     return '/pages/' + this.name.replace(/\s/g, '').toLowerCase();
   },
+
   isMain: false,
   isVisible: true
 }, {
   name: 'Privacy',
   label: 'Privacy and cookie policy page',
+
   get href() {
     return '#page=' + this.name.replace(/\s/g, '').toLowerCase();
   },
+
   get templatePath() {
     return '/pages/' + this.name.replace(/\s/g, '').toLowerCase();
   },
+
   isMain: false,
   isVisible: true
 }, {
   name: 'Terms',
   label: 'Navigate to this page to learn more about terms and conditions.',
+
   get href() {
     return '#page=' + this.name.replace(/\s/g, '').toLowerCase();
   },
+
   get templatePath() {
     return '/pages/' + this.name.replace(/\s/g, '').toLowerCase();
   },
+
   isMain: false,
   isVisible: true
 }];
-
 /*** EXTERNAL LINKS ***/
+
 var externalPages = [{
   name: 'LinkedIn',
   label: 'Open a new tab and see my profile on Linkedin',
@@ -97,8 +118,8 @@ var externalPages = [{
   href: 'https://stackshare.io/kevinliozon/lead-product-designer-stack',
   isVisible: true
 }];
-
 /*** SIDENAVS FRAGMENTS ***/
+
 var projectAnchors = [{
   name: 'Specifics',
   label: 'Go to specifics',
@@ -125,227 +146,232 @@ var projectAnchors = [{
   href: '#outcomes',
   target: 'outcomes'
 }];
-
 /*** BRANDS LIST ***/
+
 var brands = [{
   id: 'b1',
-  name: 'Placeholder',
-  img: '/assets/img/placeholder.jpg',
-  imgAlt: 'placeholder'
+  name: 'Avon',
+  img: '/assets/img/brands/avon.png',
+  imgAlt: 'Avon logo'
 }, {
   id: 'b2',
-  name: 'Placeholder',
-  img: '/assets/img/placeholder.jpg',
-  imgAlt: 'placeholder'
+  name: 'Chartered Financial Analyst',
+  img: '/assets/img/brands/cfa.png',
+  imgAlt: 'CFA logo'
 }, {
   id: 'b3',
-  name: 'Placeholder',
-  img: '/assets/img/placeholder.jpg',
-  imgAlt: 'placeholder'
+  name: 'Colt technology services',
+  img: '/assets/img/brands/colt.png',
+  imgAlt: 'Colt technology services logo'
 }, {
   id: 'b4',
-  name: 'Placeholder',
-  img: '/assets/img/placeholder.jpg',
-  imgAlt: 'placeholder'
+  name: 'Demant',
+  img: '/assets/img/brands/demant.png',
+  imgAlt: 'Demant logo'
 }, {
   id: 'b5',
-  name: 'Placeholder',
-  img: '/assets/img/placeholder.jpg',
-  imgAlt: 'placeholder'
+  name: 'Douglas and Gordon',
+  img: '/assets/img/brands/dng.png',
+  imgAlt: 'Douglas and Gordon logo'
 }, {
   id: 'b6',
-  name: 'Placeholder',
-  img: '/assets/img/placeholder.jpg',
-  imgAlt: 'placeholder'
+  name: 'Dropbox',
+  img: '/assets/img/brands/dropbox.png',
+  imgAlt: 'Dropbox logo'
 }, {
   id: 'b7',
-  name: 'Placeholder',
-  img: '/assets/img/placeholder.jpg',
-  imgAlt: 'placeholder'
+  name: 'Fuse',
+  img: '/assets/img/brands/fuse.png',
+  imgAlt: 'Fuse logo'
 }, {
   id: 'b8',
-  name: 'Placeholder',
-  img: '/assets/img/placeholder.jpg',
-  imgAlt: 'placeholder'
+  name: 'Lloyds Banking Group',
+  img: '/assets/img/brands/lloydsbank.png',
+  imgAlt: 'Lloyds Banking Group logo'
+}, {
+  id: 'b9',
+  name: 'Macmillan Cancer Support',
+  img: '/assets/img/brands/macmillan.png',
+  imgAlt: 'Macmillan Cancer Support logo'
+}, {
+  id: 'b10',
+  name: 'Migros',
+  img: '/assets/img/brands/migros.png',
+  imgAlt: 'Migros logo'
+}, {
+  id: 'b11',
+  name: 'RSA insurance group',
+  img: '/assets/img/brands/rsa.png',
+  imgAlt: 'RSA insurance group logo'
+}, {
+  id: 'b12',
+  name: 'Vodafone',
+  img: '/assets/img/brands/vodafone.png',
+  imgAlt: 'Vodafone logo'
 }];
-
 /*** HOME - PROJECTS GRID ***/
+
 var projectsHome = [{
   id: 'ph1',
-  name: 'Fuse: Design process',
-  label: 'Need to optimise your design process?',
-  themes: ['Process', 'consistency'],
-  desc: 'See how together with our product managers at Fuse we managed to nail a process that works and defines accountability for everyone.',
-  img: '/assets/img/placeholder.jpg',
-  imgAlt: 'placeholder',
+  name: 'Need to optimise your design process?',
+  label: 'Project: Design process at Fuse',
+  themes: ['Process', 'Management'],
+  desc: 'See how we managed to nail a process that works and defines accountability for everyone with our product managers at Fuse.',
+  img: '/assets/img/projects/fuse-process/thumbnail.jpg',
+  imgAlt: 'Thumbnail showing cogs',
   href: '#page=projects/fuse-process',
   templatePath: '/pages/projects/fuse-process'
 }, {
   id: 'ph2',
   name: 'Want to upskill your pool of design talents?',
-  label: 'Want to upskill your pool of design talents?',
-  themes: ['Design systems', 'consistency'],
-  desc: 'We can work together towards making sure your designers stay involved and are motivated to upskills, even through periods of change.',
-  img: '/assets/img/placeholder.jpg',
-  imgAlt: 'placeholder',
-  href: '#page=projects/fuse',
-  templatePath: '/pages/projects/fuse'
+  label: 'Project: Career ladder at Fuse',
+  themes: ['Management', 'HR'],
+  desc: 'We can work together towards making sure your designers keep motivated to upskills. Just like we did with our new career ladder in this case study.',
+  img: '/assets/img/projects/fuse-careerladder/thumbnail.jpg',
+  imgAlt: 'Thumbnail showing an allegory of career path as a road with milestones',
+  href: '#page=projects/fuse-careerladder',
+  templatePath: '/pages/projects/fuse-careerladder'
 }, {
   id: 'ph3',
   name: 'Aim to design a consistent, accessible and scalable product?',
-  label: 'Aim to design a consistent, accessible and scalable product?',
-  themes: ['Design systems', 'consistency'],
-  desc: 'Better getting things done properly from the start. A design system will save you a lot of time down the line with its reusable components so you can focus.',
-  img: '/assets/img/placeholder.jpg',
-  imgAlt: 'placeholder',
-  href: '#page=projects/fuse',
-  templatePath: '/pages/projects/fuse'
+  label: 'Project: Design systems for non-designers at Fuse',
+  themes: ['Design systems', 'Accessibility'],
+  desc: 'Better getting things done properly from the start. A design system like this one will save you a lot of time and money with its reusable components.',
+  img: '/assets/img/projects/fuse-system/thumbnail.jpg',
+  imgAlt: 'Thumbnail showing a hand grabbing another one in support',
+  href: '#page=projects/fuse-system',
+  templatePath: '/pages/projects/fuse-system'
 }, {
   id: 'ph4',
   name: 'Not sure what tools can help your user research?',
-  label: 'Not sure what tools can help your user research?',
-  themes: ['Design systems', 'consistency'],
-  desc: 'Basing your research on user interviews is ideal but you could make the most of these insights for your future projects.',
-  img: '/assets/img/placeholder.jpg',
-  imgAlt: 'placeholder',
-  href: '#page=projects/fuse',
-  templatePath: '/pages/projects/fuse'
+  label: 'Project: User research tools at Fuse',
+  themes: ['Research', 'Tools'],
+  desc: 'Do not limit your research to interview transcripts and raw data but start refining these info the way we did at Fuse instead.',
+  img: '/assets/img/projects/fuse-researchtools/thumbnail.jpg',
+  imgAlt: 'Thumbnail showing two users and a cog',
+  href: '#page=projects/fuse-researchtools',
+  templatePath: '/pages/projects/fuse-researchtools'
 }];
-
 /*** HOME - PROJECTS CAROUSEL ***/
+
 var projectsCarousel = [{
   id: 'pc1',
-  name: 'Need to optimise your design process?',
-  label: 'About Defining a design process',
-  themes: ['Process', 'consistency'],
-  desc: 'See how together with our product managers at Fuse we managed to nail a process that works and defines accountability for everyone.',
-  img: '/assets/img/placeholder.jpg',
-  imgAlt: 'placeholder',
-  href: '#page=projects/fuse-process',
-  templatePath: '/pages/projects/fuse-process'
+  name: 'Conducting an accessibility audit',
+  label: 'Project: Accessibility audits at Fuse',
+  themes: ['Accessibility', 'Client-facing'],
+  desc: 'Compliance to WCAG accessibility standards could differentiate your organisation from the competition. This case study will focus on some steps to follow in order to achieve this objective.',
+  img: '/assets/img/projects/fuse-a11y/thumbnail.jpg',
+  imgAlt: 'Thumbnail showing a hand grabbing another one in support',
+  href: '#page=projects/fuse-a11y',
+  templatePath: '/pages/projects/fuse-a11y'
 }, {
   id: 'pc2',
-  name: 'Want to upskill your pool of design talents?',
-  label: 'Getting the best from your people',
-  themes: ['Design systems', 'consistency'],
-  desc: 'We can work together towards making sure your designers stay involved and are motivated to upskills, even through periods of change.',
-  img: '/assets/img/placeholder.jpg',
-  imgAlt: 'placeholder',
-  href: '#page=projects/fuse',
-  templatePath: '/pages/projects/fuse'
+  name: 'Designing dashboards',
+  label: 'Project: Designing dashboards',
+  themes: ['Data', 'Accessibility'],
+  desc: 'How to make data easily interpretable to the user and drive their engagement? This case study is a collection of smaller ones that will show in which circumstances dashboards can help you.',
+  img: '/assets/img/projects/fuse-dashboards/thumbnail.jpg',
+  imgAlt: 'Thumbnail showing a bar chart',
+  href: '#page=projects/fuse-dashboards',
+  templatePath: '/pages/projects/fuse-dashboards'
 }, {
   id: 'pc3',
-  name: 'Aim to design a consistent, accessible and scalable product?',
-  label: 'Building a bullet proof design system',
-  themes: ['Design systems', 'consistency'],
+  name: 'Design systems for non-designers',
+  label: 'Project: Design systems for non-designers at Fuse',
+  themes: ['Design systems', 'Accessibility'],
   desc: 'Better getting things done properly from the start. A design system will save you a lot of time down the line with its reusable components so you can focus.',
-  img: '/assets/img/placeholder.jpg',
-  imgAlt: 'placeholder',
-  href: '#page=projects/fuse',
-  templatePath: '/pages/projects/fuse'
+  img: '/assets/img/projects/fuse-system/thumbnail.jpg',
+  imgAlt: 'Thumbnail showing an allegory of career path as a road with milestones',
+  href: '#page=projects/fuse-system',
+  templatePath: '/pages/projects/fuse-system'
 }];
-
 /*** PROJECTS GRID ***/
+
 var projects = [{
   id: 'p1',
-  name: 'Fuse: Design process',
-  label: 'Design process at Fuse',
-  type: 'management',
+  name: 'Optimising a design process',
+  label: 'Project: Design process at Fuse',
+  type: 'Management',
   filters: 'is-content is-manage is-featured',
-  themes: ['Design systems', 'consistency'],
-  desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+  themes: ['Process', 'Management'],
+  desc: 'Adapting a process for a medium sized organisation',
   beneficiary: 'Fuse',
-  img: '/assets/img/placeholder.jpg',
-  imgAlt: 'placeholder',
+  img: '/assets/img/projects/fuse-process/thumbnail.jpg',
+  imgAlt: 'Thumbnail showing cogs',
   href: '#page=projects/fuse-process',
   templatePath: '/pages/projects/fuse-process',
   isVisible: true
 }, {
   id: 'p2',
-  name: 'Project 2',
-  label: 'Show all projects',
-  type: 'tools',
-  filters: 'is-content is-tools is-featured',
-  themes: ['Management', 'HR', 'upskilling'],
-  desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-  beneficiary: 'Migros via Fuse',
-  img: '/assets/img/placeholder.jpg',
-  imgAlt: 'placeholder',
-  href: '#page=projects/fuse',
-  templatePath: '/pages/projects/fuse',
+  name: 'Design systems for non-designers',
+  label: 'Project: Design systems for non-designers at Fuse',
+  type: 'Design',
+  filters: 'is-content is-design is-featured',
+  themes: ['Design systems', 'Accessibility'],
+  desc: 'Creating a non-designer friendly system',
+  beneficiary: 'Fuse',
+  img: '/assets/img/projects/fuse-system/thumbnail.jpg',
+  imgAlt: 'Thumbnail showing a design prototype',
+  href: '#page=projects/fuse-system',
+  templatePath: '/pages/projects/fuse-system',
   isVisible: true
 }, {
   id: 'p3',
-  name: 'Project 3',
-  label: 'Show all projects',
-  type: 'documentation',
-  filters: 'is-content is-doc',
-  themes: ['Management', 'HR', 'upskilling'],
-  desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-  beneficiary: 'Migros via Fuse',
-  img: '/assets/img/placeholder.jpg',
-  imgAlt: 'placeholder',
-  href: '#page=projects/fuse',
-  templatePath: '/pages/projects/fuse',
+  name: 'Defining a career ladder for designers',
+  label: 'Project: Career ladder at Fuse',
+  type: 'Documentation',
+  filters: 'is-content is-doc is-featured',
+  themes: ['Management', 'HR'],
+  desc: 'Defining a career ladder tailored to your team',
+  beneficiary: 'Fuse',
+  img: '/assets/img/projects/fuse-careerladder/thumbnail.jpg',
+  imgAlt: 'Thumbnail showing an allegory of career path as a road with milestones',
+  href: '#page=projects/fuse-careerladder',
+  templatePath: '/pages/projects/fuse-careerladder',
   isVisible: true
 }, {
   id: 'p4',
-  name: 'Project 4',
-  label: 'Show all projects',
-  type: 'projects',
-  filters: 'is-content is-proj',
-  themes: ['Management', 'HR', 'upskilling'],
-  desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-  beneficiary: 'Migros via Fuse',
-  img: '/assets/img/placeholder.jpg',
-  imgAlt: 'placeholder',
-  href: '#page=projects/fuse',
-  templatePath: '/pages/projects/fuse',
+  name: 'Tooling up your user research',
+  label: 'Project: User research tools at Fuse',
+  type: 'Tool',
+  filters: 'is-content is-tool is-featured',
+  themes: ['Research', 'Tools'],
+  desc: 'Providing the right tools for facilitating your user research',
+  beneficiary: 'Fuse',
+  img: '/assets/img/projects/fuse-researchtools/thumbnail.jpg',
+  imgAlt: 'Thumbnail showing two users and a cog',
+  href: '#page=projects/fuse-researchtools',
+  templatePath: '/pages/projects/fuse-researchtools',
   isVisible: true
 }, {
   id: 'p5',
-  name: 'Project 5',
-  label: 'Show all projects',
-  type: 'default',
-  filters: 'is-content is-manage',
-  themes: ['Management', 'HR', 'upskilling'],
-  desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-  beneficiary: 'Migros via Fuse',
-  img: '/assets/img/placeholder.jpg',
-  imgAlt: 'placeholder',
-  href: '#page=projects/fuse',
-  templatePath: '/pages/projects/fuse',
+  name: 'Conducting an accessibility audit',
+  label: 'Project: Accessibility audits at Fuse',
+  type: 'Management',
+  filters: 'is-content is-manage is-featured',
+  themes: ['Accessibility', 'Client-facing'],
+  desc: 'Auditing the accessibility of clients\' projects',
+  beneficiary: 'Fuse',
+  img: '/assets/img/projects/fuse-a11y/thumbnail.jpg',
+  imgAlt: 'Thumbnail showing a hand grabbing another one in support',
+  href: '#page=projects/fuse-a11y',
+  templatePath: '/pages/projects/fuse-a11y',
   isVisible: true
 }, {
   id: 'p6',
-  name: 'Project 6',
-  label: 'Show all projects',
-  type: 'default',
-  filters: 'is-content is-tools',
-  themes: ['Management', 'HR', 'upskilling'],
-  desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-  beneficiary: 'Migros via Fuse',
-  img: '/assets/img/placeholder.jpg',
-  imgAlt: 'placeholder',
-  href: '#page=projects/fuse',
-  templatePath: '/pages/projects/fuse',
-  isVisible: true
-}, {
-  id: 'p7',
-  name: 'Project 7',
-  label: 'Show all projects',
-  type: 'default',
-  filters: 'is-content is-doc',
-  themes: ['Management', 'HR', 'upskilling'],
-  desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-  beneficiary: 'Migros via Fuse',
-  img: '/assets/img/placeholder.jpg',
-  imgAlt: 'placeholder',
-  href: '#page=projects/fuse',
-  templatePath: '/pages/projects/fuse',
+  name: 'Designing dashboards',
+  label: 'Project: Designing dashboards',
+  type: 'Design',
+  filters: 'is-content is-design is-featured',
+  themes: ['Data', 'Accessibility'],
+  desc: 'Some good practices regarding dashboards',
+  beneficiary: 'Multiple accounts',
+  img: '/assets/img/projects/fuse-dashboards/thumbnail.jpg',
+  imgAlt: 'Thumbnail showing a bar chart',
+  href: '#page=projects/fuse-dashboards',
+  templatePath: '/pages/projects/fuse-dashboards',
   isVisible: true
 }];
-
 /*** NDA URLS LIST ***/
 
-var protectedProjectsUrls = ['#page=projects/fuse-process', '#page=projects/fuse'];
+var protectedProjectsUrls = ['#page=projects/fuse', '#page=projects/fuse'];

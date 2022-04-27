@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /**
  * COMPONENT FOR:
@@ -6,7 +6,6 @@
  * 
  * Generates and HTML <ul> node with helper links
  */
-
 var fallbackLinksComponent = document.createElement('ul');
 fallbackLinksComponent.classList.add('c-list', 'c-list--links');
 fallbackLinksComponent.innerHTML = '\
