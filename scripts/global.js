@@ -131,10 +131,10 @@ var projectAnchors = [{
   href: '#problem',
   target: 'problem'
 }, {
-  name: 'Context',
-  label: 'Go to context',
-  href: '#context',
-  target: 'context'
+  name: 'Approach',
+  label: 'Go to approach',
+  href: '#approach',
+  target: 'approach'
 }, {
   name: 'Solution',
   label: 'Go to  solution',
@@ -375,11 +375,11 @@ var projects = [{
 }, {
   id: 'p7',
   name: 'The synergy between user flows and lo-fi designs',
-  label: 'Project: The synergy between user flows and lo-fi designss',
+  label: 'Project: The synergy between user flows and lo-fi designs',
   type: 'tool',
   filters: 'is-content is-tool is-featured',
   themes: ['Ideation', 'User flows'],
-  desc: 'Giving form to your flow diagrams to test them',
+  desc: 'How user flows and designing lo-fi can help you nailing down the right solution.',
   beneficiary: 'Fuse',
   img: '/assets/img/projects/fuse-diagramslofi/thumbnail.jpg',
   imgAlt: 'Thumbnail showing a flow diagram',
