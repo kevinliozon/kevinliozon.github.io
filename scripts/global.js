@@ -389,4 +389,4 @@ var projects = [{
 }];
 /*** NDA URLS LIST ***/
 
-var protectedProjectsUrls = ['#page=projects/fuse', '#page=projects/fuse'];
+var protectedProjectsUrls = ['#page=projects/fuse-dashboards', '#page=projects/fuse-dashboards'];
